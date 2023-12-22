@@ -30,6 +30,7 @@ To use BRMM, download `BRMM_x64.exe` through the "Releases" page or from [this l
 
 ## Possible Improvements:
 - Add content wrapping so the app fits more window sizes.
+- Add light mode support.
 - Allow users to remove mods from within the app.
 - Allow users to choose their Brick Rigs install path.
 - Improve loading times.
