@@ -21,7 +21,7 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 
 ## How Does it Work?
 
-BRMM is made entirely in ~Python 3.12~ to handle the file operations and the GUI.
+BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
 
 The source code is included as "main.py" for those who want it.
 
