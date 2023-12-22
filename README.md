@@ -1,5 +1,15 @@
 # BRMM
 
+## System Requirements:
+
+'''
+Windows 10/11
+64 bit Architecture
+Brick Rigs, version 1.6.1+
+'''
+
+## What is This?
+
 ![image](https://github.com/anonymous-editor/BRMM/assets/74514726/5fbc4b7b-179e-4574-82fb-340ac1190fcf)
 
 This is BRMM, an unoficcial mod manager for Brick Rigs. It can:
