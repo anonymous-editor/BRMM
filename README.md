@@ -25,6 +25,8 @@ BRMM is made entirely in ~Python 3.12~ to handle the file operations and the GUI
 
 The source code is included as "main.py" for those who want it.
 
+To use BRMM, download `BRMM_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
+
 
 ## Possible Improvements:
 - Add content wrapping so the app fits more window sizes.
