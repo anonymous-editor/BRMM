@@ -3,7 +3,7 @@
 ## System Requirements:
 
 ```
-Windows 10/11 64 bit
+Windows 10/11, 64 bit
 Brick Rigs, version 1.6.1+
 ```
 
