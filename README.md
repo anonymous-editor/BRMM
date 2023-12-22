@@ -19,4 +19,13 @@ This is BRMM, an unoficcial, 'plug and play' mod managing solution for Brick Rig
 
 ## How Does it Work?
 
-BRMM is made entirely in [b]Python 3.12[/b]
+BRMM is made entirely in ~Python 3.12~ to handle the file operations and the GUI.
+
+The source code is included as "main.py" for those who want it.
+
+## Possible Improvements:
+- Add content wrapping so the app fits more window sizes.
+- Allow users to remove mods from within the app.
+- Allow users to choose their Brick Rigs install path.
+- Improve loading times.
+- Improve GUI rendering.
