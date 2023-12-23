@@ -35,15 +35,18 @@ def W2():
       
     alert_window.mainloop()
 
-def perform_operation(self):
-    while self.operation_running:
-        self.operation_running = False    
+should_continue = True
+
+def do_nothing():
+    
+    global should_continue
+    should_continue = False
 
 def W3():
 
     alert1_window = CTk()
     alert1_window.title("Confirmation")
-    alert1_window.geometry("450x")
+    alert1_window.geometry("550x200")
     
     message = CTkLabel(alert1_window, text="\nAre you sure that you want to remove this mod?", font=("Segoe UI", 16))
     message.pack()
@@ -51,14 +54,21 @@ def W3():
     confirm_button = CTkButton(alert1_window, text="Yes", command=alert1_window.destroy, font=("Segoe UI Semibold", 18))
     confirm_button.pack(pady=16)
     
-    deny_button = CTkButton(alert1_window, text="No", command=perform_operation, font=("Segoe UI Semibold", 18))
+    deny_button = CTkButton(alert1_window, text="No", command=do_nothing, font=("Segoe UI Semibold", 18))
     deny_button.pack(pady=(0,16))
       
     alert1_window.mainloop()
 
 def download_file(file_id, destination):
-        
+    
+    global should_continue
+    
     if os.path.exists(destination):
+        
+        if not should_continue:
+        
+            return
+        
         W3()
                 
         os.remove(destination)
