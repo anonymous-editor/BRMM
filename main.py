@@ -37,40 +37,38 @@ def W2():
 
 should_continue = True
 
-def do_nothing():
-    
+def set_should_continue(value):
     global should_continue
-    should_continue = False
+    should_continue = value
 
 def W3():
-
     alert1_window = CTk()
     alert1_window.title("Confirmation")
-    alert1_window.geometry("550x200")
-    
-    message = CTkLabel(alert1_window, text="\nAre you sure that you want to remove this mod?", font=("Segoe UI", 16))
+    alert1_window.geometry("500x270")
+
+    message = CTkLabel(alert1_window, text="\nAre you sure that you want to remove this mod?\n\nAll file operations will be shown after the app is closed.\n\nYou MUST select a button before closing this window.", font=("Segoe UI", 16))
     message.pack()
-    
-    confirm_button = CTkButton(alert1_window, text="Yes", command=alert1_window.destroy, font=("Segoe UI Semibold", 18))
-    confirm_button.pack(pady=16)
-    
-    deny_button = CTkButton(alert1_window, text="No", command=do_nothing, font=("Segoe UI Semibold", 18))
-    deny_button.pack(pady=(0,16))
-      
+
+    confirm_button = CTkButton(alert1_window, text="Yes", command=lambda: [set_should_continue(True), alert1_window.destroy()], font=("Segoe UI", 18))
+    confirm_button.pack(pady=(30,15))
+
+    deny_button = CTkButton(alert1_window, text="No", command=lambda: [set_should_continue(False), alert1_window.destroy()], font=("Segoe UI", 18))
+    deny_button.pack(pady=(0,30))
+
     alert1_window.mainloop()
 
 def download_file(file_id, destination):
     
     global should_continue
-    
+
     if os.path.exists(destination):
         
-        if not should_continue:
-        
-            return
-        
         W3()
-                
+        
+        if not should_continue:
+            
+            return
+
         os.remove(destination)
         
         shutil.rmtree(os.path.splitext(destination)[0])
@@ -78,21 +76,43 @@ def download_file(file_id, destination):
         return app
 
     url = f"https://drive.google.com/uc?id={file_id}"
+    
     gdown.download(url, destination, quiet=False)
 
     with zipfile.ZipFile(destination, 'r') as zip_ref:
-        zip_ref.extractall(os.path.dirname(destination))
-    
-    W2()
-      
-def download_zipfile(url, filename):
-    response = requests.get(url)
-    with open(filename, 'wb') as file:
-        file.write(response.content)
         
-    with zipfile.ZipFile(filename, 'r') as zip_ref:
-        zip_ref.extractall(os.path.dirname(filename))
+        zip_ref.extractall(os.path.dirname(destination))
+
+    W2()
+
+def download_zipfile(url, filename):
     
+    global should_continue
+
+    if os.path.exists(filename):
+        
+        W3()
+        
+        if not should_continue:
+            
+            return
+
+        os.remove(filename)
+        
+        shutil.rmtree(os.path.splitext(filename)[0])
+        
+        return app
+
+    response = requests.get(url)
+    
+    with open(filename, 'wb') as file:
+        
+        file.write(response.content)
+
+    with zipfile.ZipFile(filename, 'r') as zip_ref:
+        
+        zip_ref.extractall(os.path.dirname(filename))
+
     W2()
      
 # App Frame Code
