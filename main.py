@@ -4,12 +4,14 @@
 import tkinter as tk
 from tkinter import PhotoImage
 import customtkinter as ctk
+from customtkinter import CTk, CTkLabel, CTkButton
 from PIL import Image
 from io import BytesIO
 import os
 import gdown
 import zipfile
 import requests
+import shutil
 
 path = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Brick Rigs\\BrickRigs\\Mods'
 
@@ -21,12 +23,57 @@ ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
 
 # Button Controllers #
+
+def W2():
+    
+    alert_window = CTk()
+    alert_window.title("Installation Complete!")
+    alert_window.geometry("450x120")
+    
+    message = CTkLabel(alert_window, text="\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n", font=("Segoe UI", 16))
+    message.pack()
+      
+    alert_window.mainloop()
+
+def perform_operation(self):
+    while self.operation_running:
+        self.operation_running = False    
+
+def W3():
+
+    alert1_window = CTk()
+    alert1_window.title("Confirmation")
+    alert1_window.geometry("450x")
+    
+    message = CTkLabel(alert1_window, text="\nAre you sure that you want to remove this mod?", font=("Segoe UI", 16))
+    message.pack()
+    
+    confirm_button = CTkButton(alert1_window, text="Yes", command=alert1_window.destroy, font=("Segoe UI Semibold", 18))
+    confirm_button.pack(pady=16)
+    
+    deny_button = CTkButton(alert1_window, text="No", command=perform_operation, font=("Segoe UI Semibold", 18))
+    deny_button.pack(pady=(0,16))
+      
+    alert1_window.mainloop()
+
 def download_file(file_id, destination):
-   url = f"https://drive.google.com/uc?id={file_id}"
-   gdown.download(url, destination, quiet=False)
-   
-   with zipfile.ZipFile(destination, 'r') as zip_ref:
-      zip_ref.extractall(os.path.dirname(destination))
+        
+    if os.path.exists(destination):
+        W3()
+                
+        os.remove(destination)
+        
+        shutil.rmtree(os.path.splitext(destination)[0])
+        
+        return app
+
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, destination, quiet=False)
+
+    with zipfile.ZipFile(destination, 'r') as zip_ref:
+        zip_ref.extractall(os.path.dirname(destination))
+    
+    W2()
       
 def download_zipfile(url, filename):
     response = requests.get(url)
@@ -35,7 +82,9 @@ def download_zipfile(url, filename):
         
     with zipfile.ZipFile(filename, 'r') as zip_ref:
         zip_ref.extractall(os.path.dirname(filename))
-      
+    
+    W2()
+     
 # App Frame Code
 app = ctk.CTk()
 app.geometry("1790x720")
@@ -63,7 +112,7 @@ def mod_content_font():
 
 # Button UI References #
 def install_button():
-    return {"text": "Install", "font": ("Segoe UI", 18)}
+    return {"text": "Install/Remove", "font": ("Segoe UI", 18)}
 
 def install_button_packing():
    return {"anchor": "center", "ipady": 5, "pady": 15}
