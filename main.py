@@ -13,7 +13,33 @@ import zipfile
 import requests
 import shutil
 
-path = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Brick Rigs\\BrickRigs\\Mods'
+from configparser import ConfigParser #This section was provided by Iridium! Hello! :D
+
+cfg = ConfigParser()
+
+cwd = os.path.dirname(os.path.realpath(__file__)) #The full current working directory.
+cfgloc = cwd + "\\" + "BRMMConf.ini"
+
+def gendefault():
+    '''Generate default .ini file.'''
+    cfg["BRMMCFG"] = {
+        "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Brick Rigs\\BrickRigs\\Mods",
+        "startsmall": "False"
+    }
+    with open(cfgloc, "w") as file:
+        cfg.write(file)
+
+if not os.path.exists(cfgloc):
+    gendefault()
+
+cfg.read(cfgloc)
+try:
+    path = cfg.get('BRMMCFG', 'path')
+    stsmall = True if cfg.get('BRMMCFG', 'startsmall') == "true" else False
+except:
+    if os.path.exists(cfgloc):
+        os.remove(cfgloc)
+    gendefault() #End of this section..
 
 if not os.path.exists(path):
     os.mkdir(path)
@@ -87,7 +113,10 @@ def download_zipfile(url, filename):
      
 # App Frame Code
 app = ctk.CTk()
-app.geometry("1790x720")
+if stsmall == False: #Iridium strikes again!
+    app.geometry("1790x720")
+else:
+    app.geometry("700x400")
 app.title("Brick Rigs Mod Manager")
 app.grid_rowconfigure(0, weight=1)
 app.grid_columnconfigure(0, weight=1)
