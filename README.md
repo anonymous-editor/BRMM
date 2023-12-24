@@ -17,7 +17,7 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 - Download zip files to that mods folder.
 - Rename the .zip files to work with BR.
 - Extract the .zip files.
-- Displat 
+- Display prompts about if the mod is installed/not, etc.
 
 
 ## How Does it Work?
@@ -40,3 +40,4 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 - Allow users to choose their Brick Rigs install path.
 - Improve loading times.
 - Improve GUI rendering.
+- Improve HiDPI support.
