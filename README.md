@@ -17,6 +17,7 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 - Download zip files to that mods folder.
 - Rename the .zip files to work with BR.
 - Extract the .zip files.
+- Displat 
 
 
 ## How Does it Work?
@@ -25,13 +26,17 @@ BRMM is made entirely in **Python 3.12** to handle the file operations and the G
 
 The source code is included as "main.py" for those who want it.
 
-To use BRMM, download `BRMM_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
+To use BRMM, download `BRMM110_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
+
+## Basic Mod Tutorial
+
+HUGE thanks to Andi_pog for making this vid to showcase BRMM.
+
 
 
 ## Possible Improvements:
 - Add content wrapping so the app fits more window sizes.
 - Add light mode support.
-- Allow users to remove mods from within the app.
 - Allow users to choose their Brick Rigs install path.
 - Improve loading times.
 - Improve GUI rendering.
