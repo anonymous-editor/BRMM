@@ -21,15 +21,31 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 
 BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
 
-The source code is included as "main.py" for those who want it.
 
-To use BRMM, download `BRMM110_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
+To use BRMM, download `BRMM1xx_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
 
-## Basic Mod Showcase
+# Basic Mod Showcase
 
 HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
 
+
+# Source Code
+
+The source code is included as `BRMM_latest.py` and `BRMM_100.py` for those who want it. All dependencies are listed as `imports` at the top of each script.
+
+To open the script from source, you'll need:
+- An IDE (I just used `Visual Studio Code`)
+- `Python 3.12`
+
+To actually run the script, you'll need the following dependecies:
+- `pip` (Package Manger to install everything below)
+- `customtkinter`
+- `pillow `
+- `gdown`
+- `requests`
+
+  Instructions to install things via `pip` can be found [here](https://pip.pypa.io/en/stable/installation/)
 
 ## Possible Improvements:
 - Add content wrapping so the app fits more window sizes.
