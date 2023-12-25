@@ -2,6 +2,7 @@
 
 # Dependencies #
 import tkinter as tk
+from tkinter import messagebox
 import customtkinter as ctk
 from customtkinter import filedialog, CTk, CTkLabel
 from PIL import Image, ImageTk
@@ -14,15 +15,55 @@ import subprocess
 
 root = tk.Tk()
 root.withdraw()
-    
+
+# App Frame Code
+
+class MyApp(CTk):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("Brick Rigs Mod Manager")
+        self.geometry("1920x1080")
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+app = MyApp()
+
+scrollable_frame = ctk.CTkScrollableFrame(master=app)
+scrollable_frame.grid(row=0, column=0, sticky='nsew', rowspan=7, columnspan=4)
+
+
 # Theming #
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
 
-# Path variables
+# Path variables #
 
-modpath = filedialog.askdirectory(title="Select your 'BrickRigs' folder to continue.")
+def W4():
+    
+    save_window = CTk()
+    save_window.title("Initial Setup Status")
+    save_window.geometry("550x165")
 
+    message = CTkLabel(save_window, text="\nBRMM has saved your Brick Rigs install path in your user folder!\n\nFrom now on, you don't have to manually select your 'BrickRigs' folder.\n\nPlease restart BRMM for full functionality.\n", font=("Segoe UI", 16))
+    message.pack()
+
+    save_window.mainloop()
+    
+if not os.path.isfile('modpath.txt'):
+    
+    modpath = filedialog.askdirectory(title="Select your 'BrickRigs' folder to continue.")
+    with open('modpath.txt', 'w') as f:
+        
+        f.write(modpath)
+
+    W4()
+        
+else:
+    
+    with open('modpath.txt', 'r') as f:
+        
+        modpath = f.read()
+        
 # Button Controllers #
 
 def alreadyexists():
@@ -47,7 +88,7 @@ def W2():
       
     alert_window.mainloop()
 
-def download_file(file_id, destination):
+def download_googledrive_zipfile(file_id, destination):
 
     if os.path.exists(destination):
             
@@ -65,7 +106,7 @@ def download_file(file_id, destination):
 
     W2()
 
-def downloadpak_file(file_id, destination):
+def download_googledrive_pakfile(file_id, destination):
     
     if os.path.exists(destination):
             
@@ -79,7 +120,7 @@ def downloadpak_file(file_id, destination):
 
     W2()
 
-def download_zipfile(url, filename):
+def download_discord_zipfile(url, filename):
     
     if os.path.exists(filename):
             
@@ -99,7 +140,7 @@ def download_zipfile(url, filename):
 
     W2()
 
-def downloaddiscord_pakfile(url, filename):
+def download_discord_pakfile(url, filename):
 
     if os.path.exists(filename):
             
@@ -116,42 +157,58 @@ def downloaddiscord_pakfile(url, filename):
 
     return app
 
-# Frame UI References #
-def create_frame(parent, **kwargs):
-   frame = tk.Frame(parent, bg="#003459", padx=10, pady=10, **kwargs)
-   return frame
+class ContentFormatting:
+    @staticmethod
+    def create_frame(parent, **kwargs):
+        frame = tk.Frame(parent, bg="#003459", padx=10, pady=10, **kwargs)
+        return frame
 
-def create_frame_padding():
-    return {"padx": 30, "pady": 30, "sticky": 'nsew'}
+    @staticmethod
+    def create_frame_padding():
+        return {"padx": 30, "pady": 30, "sticky": 'nsew'}
 
-# Mod Description UI References #
-def mod_title_font():
-    return {"font": ("Segoe UI Semibold", 28)}
+    @staticmethod
+    def mod_title_font():
+        return {"font": ("Segoe UI Semibold", 28)}
 
-def mod_content_font():
-    return {"font": ("Segoe UI Semibold", 28)}
+    @staticmethod
+    def mod_content_font():
+        return {"font": ("Segoe UI Semibold", 28)}
 
-# Button UI References #
-def install_button():
-    return {"text": "Install", "font": ("Segoe UI", 18)}
+    @staticmethod
+    def install_button():
+        return {"text": "Install", "font": ("Segoe UI", 18)}
 
-def special_install_button():
-    return {"text": "Remove", "font": ("Segoe UI", 18)}
+    @staticmethod
+    def remove_button():
+        return {"text": "Remove", "font": ("Segoe UI", 18)}
 
-def install_button_packing():
-   return {"anchor": "center", "ipady": 5, "pady": 15}
+    @staticmethod
+    def install_button_packing():
+        return {"anchor": "center", "ipady": 5, "pady": 15}
 
-def special_install_button_packing():
-   return {"anchor": "center", "ipady": 5, "pady": (0,8)}
+    @staticmethod
+    def remove_button_packing():
+        return {"anchor": "center", "ipady": 5, "pady": (0,8)}
 
-def create_ctk_image(image):
-  return {"light_image": image, "size": (480, 270)}
+    @staticmethod
+    def create_image_label(photo):
+        return {"image": photo, "text": ""}
 
-def create_image_label(photo):
-    return {"image": photo, "text": ""}
+    @staticmethod
+    def create_image_label_packing(is_centered):
+        return {"anchor": is_centered, "padx": 30, "pady": 15}
 
-def create_image_label_packing(is_centered):
-    return {"anchor": is_centered, "padx": 30, "pady": 15}
+create_frame = ContentFormatting.create_frame
+create_frame_padding = ContentFormatting.create_frame_padding
+mod_title_font = ContentFormatting.mod_title_font
+mod_content_font = ContentFormatting.mod_content_font
+install_button = ContentFormatting.install_button
+install_button_packing = ContentFormatting.install_button_packing
+remove_button = ContentFormatting.remove_button
+remove_button_packing = ContentFormatting.remove_button_packing
+create_image_label = ContentFormatting.create_image_label
+create_image_label_packing = ContentFormatting.create_image_label_packing
 
 # Uninstaller #
 
@@ -205,17 +262,6 @@ def removepakfile(file_path):
         usuccessmessage()
         
         return app
- 
-# App Frame Code
-
-app = ctk.CTk()
-app.geometry("1790x720")
-app.title("Brick Rigs Mod Manager")
-app.grid_rowconfigure(0, weight=1)
-app.grid_columnconfigure(0, weight=1)
-
-scrollable_frame = ctk.CTkScrollableFrame(master=app)
-scrollable_frame.grid(row=0, column=0, sticky='nsew', rowspan=7, columnspan=4)
 
 # Image References #
 
@@ -261,11 +307,11 @@ app.bind("<Configure>", lambda e: prevent_go())
 textbox_3 = ctk.CTkLabel(frame_3, font=("Segoe UI", 16), text="This map brings the world of American motorsports into Brick Rigs, with realistic props, lighting, Arizonian landscaping, and track layouts. There are many types of motorsports events here, ranging from demolition derbies to oval racing.\n\nSize: 167 MB\nAuthor: batt", wraplength=500)
 textbox_3.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_3, command=lambda: download_file('1D6vJSi0rz6ix2oPLwFk9S2Bai2xOTGiS', f'{modpath}\\Mods\\BricksdaleSpeedway.zip'), **install_button())
+button = ctk.CTkButton(frame_3, command=lambda: download_googledrive_zipfile('1D6vJSi0rz6ix2oPLwFk9S2Bai2xOTGiS', f'{modpath}\\Mods\\BricksdaleSpeedway.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_3, command=lambda: remove_file(f"{modpath}\\Mods\\BricksdaleSpeedway.zip", f"{modpath}\\Mods\\BricksdaleSpeedway"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_3, command=lambda: remove_file(f"{modpath}\\Mods\\BricksdaleSpeedway.zip", f"{modpath}\\Mods\\BricksdaleSpeedway"), **remove_button())
+button.pack(**remove_button_packing())
 
 # Batt's Showroom UI #
 frame_4 = create_frame(scrollable_frame)
@@ -286,11 +332,11 @@ label.pack(**create_image_label_packing('center'))
 textbox_5 = ctk.CTkLabel(frame_4, font=("Segoe UI", 16), text="This map is designed with excellent lighting conditions in mind and comes with a suite of post-processing options. It's intended for you to take pictures of items to the Steam Workshop. Make sure to crank up your settings up when you do.\n\nSize: 6.94 MB\nAuthor: batt", wraplength=500)
 textbox_5.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_4, command=lambda: download_file('1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy', f'{modpath}\\Mods\\batt_showroom.zip'), **install_button())
+button = ctk.CTkButton(frame_4, command=lambda: download_googledrive_zipfile('1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy', f'{modpath}\\Mods\\batt_showroom.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_4, command=lambda: remove_file(f"{modpath}\\Mods\\batt_showroom.zip", f"{modpath}\\Mods\\batt_showroom"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_4, command=lambda: remove_file(f"{modpath}\\Mods\\batt_showroom.zip", f"{modpath}\\Mods\\batt_showroom"), **remove_button())
+button.pack(**remove_button_packing())
 
 # FNAF Map UI #
 
@@ -312,11 +358,11 @@ label.pack(**create_image_label_packing('center'))
 textbox_7 = ctk.CTkLabel(frame_5, font=("Segoe UI", 16), text="This map is a replica of 'Five Nights At Freddy's,' a classic horror game. In Brick Rigs, the map has it's own custom gamemode to suit the map. There's even a way to cook and eat pizzas from within the map, along with many other high-quality details.\n\nSize: 56.7 MB\nAuthor: lord_bondrewd", wraplength=500)
 textbox_7.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_5, command=lambda: download_file('1z9TrMazaFOLkTJ8r4h5lWJ1lkLq6QzLr', f'{modpath}\\Mods\\FNAF1.zip'), **install_button())
+button = ctk.CTkButton(frame_5, command=lambda: download_googledrive_zipfile('1z9TrMazaFOLkTJ8r4h5lWJ1lkLq6QzLr', f'{modpath}\\Mods\\FNAF1.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_5, command=lambda: remove_file(f"{modpath}\\Mods\\FNAF1.zip", f"{modpath}\\Mods\\FNAF1"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_5, command=lambda: remove_file(f"{modpath}\\Mods\\FNAF1.zip", f"{modpath}\\Mods\\FNAF1"), **remove_button())
+button.pack(**remove_button_packing())
 
 # Vanilla Content Expansion UI #
 
@@ -338,11 +384,11 @@ label.pack(**create_image_label_packing('center'))
 textbox_9 = ctk.CTkLabel(frame_6, font=("Segoe UI", 16), text="This mod features over 10 new, develepor-quality weapons, weapon paints, and even a new 'Awooga Car Horn.' The ten weapons encompass primary, secondary, and special weapon types. However, be careful about joining multiplayer servers without this mod.\n\nSize: 98.4 MB\nAuthor: kvthetank", wraplength=500)
 textbox_9.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_6, command=lambda: download_file('1RnQKGILY8f-v8Cq8Hpp-acye_bRsTE0v', f'{modpath}\\Mods\\VanillaContentExpansion.zip'), **install_button())
+button = ctk.CTkButton(frame_6, command=lambda: download_googledrive_zipfile('1RnQKGILY8f-v8Cq8Hpp-acye_bRsTE0v', f'{modpath}\\Mods\\VanillaContentExpansion.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_6, command=lambda: remove_file(f"{modpath}\\Mods\\VanillaContentExpansion.zip", f"{modpath}\\Mods\\VanillaContentExpansion"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_6, command=lambda: remove_file(f"{modpath}\\Mods\\VanillaContentExpansion.zip", f"{modpath}\\Mods\\VanillaContentExpansion"), **remove_button())
+button.pack(**remove_button_packing())
 
 # Black Theme #
 
@@ -364,11 +410,11 @@ label.pack(**create_image_label_packing('center'))
 textbox_11 = ctk.CTkLabel(frame_7, font=("Segoe UI", 16), text="This is the first Brick Rigs mod to add a new color scheme to the user interface. It is 'simple,' according to the publisher himself. Not much else can be said about this mod, besides it's minimal size of only ~530 KB.\n\nSize: 526.07 KB\nAuthor: Redacted_xd", wraplength=500)
 textbox_11.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_7, command=lambda: download_zipfile('https://cdn.discordapp.com/attachments/751767065970475093/1181849071930060831/BlackTheme.zip?', f'{modpath}\\Mods\\BlackTheme.zip'), **install_button())
+button = ctk.CTkButton(frame_7, command=lambda: download_discord_zipfile('https://cdn.discordapp.com/attachments/751767065970475093/1181849071930060831/BlackTheme.zip?', f'{modpath}\\Mods\\BlackTheme.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_7, command=lambda: remove_file(f"{modpath}\\Mods\\BlackTheme.zip", f"{modpath}\\Mods\\BlackTheme"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_7, command=lambda: remove_file(f"{modpath}\\Mods\\BlackTheme.zip", f"{modpath}\\Mods\\BlackTheme"), **remove_button())
+button.pack(**remove_button_packing())
 
 # Airstrike #
 
@@ -390,11 +436,11 @@ label.pack(**create_image_label_packing('center'))
 textbox_13 = ctk.CTkLabel(frame_8, font=("Segoe UI", 16), text="Another first for Brick Rigs are nukes, not the ones that kids use to troll in public servers, but instead, ones that can be spawned in by players for a less laggy experience. These explosives are classified as 'weapons' in their selection menu, which have some quirks to them.\n\nSize: 47.8 MB\nAuthor: lord_bondrewd", wraplength=500)
 textbox_13.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_8, command=lambda: download_file('1QvqNwaJJvweAr1eKNzNpVWseFEsj36iq', f'{modpath}\\Mods\\Airstrike.zip'), **install_button())
+button = ctk.CTkButton(frame_8, command=lambda: download_googledrive_zipfile('1QvqNwaJJvweAr1eKNzNpVWseFEsj36iq', f'{modpath}\\Mods\\Airstrike.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_8, command=lambda: remove_file(f"{modpath}\\Mods\\Airstrike.zip", f"{modpath}\\Mods\\Airstrike"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_8, command=lambda: remove_file(f"{modpath}\\Mods\\Airstrike.zip", f"{modpath}\\Mods\\Airstrike"), **remove_button())
+button.pack(**remove_button_packing())
 
 # Knife Mod #
 
@@ -416,11 +462,11 @@ label.pack(**create_image_label_packing('center'))
 textbox_15 = ctk.CTkLabel(frame_9, font=("Segoe UI", 16), text="This mod features knives, which are paintable. They have the same 'brick-built' aesthetic found in other high-quality mods. The knife itself works by 'shooting' a weak bullet at a target when triggered with the right key.\n\nSize: 1.38 MB\nAuthor: batt", wraplength=500)
 textbox_15.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_9, command=lambda: download_file('1y5QEsYv1HCeNGna2O9RYtDmuNlTNdnzc', f'{modpath}\\Mods\\batt_knife.zip'), **install_button())
+button = ctk.CTkButton(frame_9, command=lambda: download_googledrive_zipfile('1y5QEsYv1HCeNGna2O9RYtDmuNlTNdnzc', f'{modpath}\\Mods\\batt_knife.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_9, command=lambda: remove_file(f"{modpath}\\Mods\\batt_knife.zip", f"{modpath}\\Mods\\batt_knife"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_9, command=lambda: remove_file(f"{modpath}\\Mods\\batt_knife.zip", f"{modpath}\\Mods\\batt_knife"), **remove_button())
+button.pack(**remove_button_packing())
 
 # Clouds Mod #
 
@@ -442,11 +488,11 @@ label.pack(**create_image_label_packing('center'))
 textbox_17 = ctk.CTkLabel(frame_10, font=("Segoe UI", 16), text="This mod replaces the in-game weather system with a realistic alternative. It also changes the Sun's size to be more life-like, and even comes with a moon phase and a space background. It's also very customizable.\n\nSize: 241 MB\nAuthor: andi_pog", wraplength=500)
 textbox_17.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_10, command=lambda: downloadpak_file('1SRmDYR2DLU2YQbCzs2ExBz_huj1GkLQv', f'{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak'), **install_button())
+button = ctk.CTkButton(frame_10, command=lambda: download_googledrive_pakfile('1SRmDYR2DLU2YQbCzs2ExBz_huj1GkLQv', f'{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_10, command=lambda: removepakfile(f"{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_10, command=lambda: removepakfile(f"{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak"), **remove_button())
+button.pack(**remove_button_packing())
 
 # Advanced Sights #
 
@@ -468,10 +514,10 @@ label.pack(**create_image_label_packing('center'))
 textbox_17 = ctk.CTkLabel(frame_11, font=("Segoe UI", 16), text="This 'simple' mod adds a scope with cool night visibility and several custom features. You're able to control the scope through various mouse controls. There's also a way to control the scope mode. More features to this mod are coming soon!\n\nSize: 8.94 MB\nAuthor: Redacted_xd", wraplength=500)
 textbox_17.pack(anchor="center", padx=30, pady=15)
 
-button = ctk.CTkButton(frame_11, command=lambda: download_zipfile('https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?', f'{modpath}\\Mods\\AdvancedScopes.zip'), **install_button())
+button = ctk.CTkButton(frame_11, command=lambda: download_discord_zipfile('https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?', f'{modpath}\\Mods\\AdvancedScopes.zip'), **install_button())
 button.pack(**install_button_packing())
 
-button = ctk.CTkButton(frame_11, command=lambda: remove_file(f"{modpath}\\Mods\\AdvancedScopes.zip", f"{modpath}\\Mods\\AdvancedScopes"), **special_install_button())
-button.pack(**special_install_button_packing())
+button = ctk.CTkButton(frame_11, command=lambda: remove_file(f"{modpath}\\Mods\\AdvancedScopes.zip", f"{modpath}\\Mods\\AdvancedScopes"), **remove_button())
+button.pack(**remove_button_packing())
 
 app.mainloop()
