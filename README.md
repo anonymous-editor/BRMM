@@ -39,5 +39,6 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 - Add light mode support.
 - Allow users to choose their Brick Rigs install path.
 - Improve loading times.
-- Improve GUI rendering.
 - Improve HiDPI support.
+- ~- Improve GUI rendering.~
+
