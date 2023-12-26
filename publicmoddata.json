@@ -43,16 +43,5 @@
     "author":"kvthetank",
     "installpath":"/VanillaContentExpansion.zip",
     "deinstallpath":"/VanillaContentExpansion"
-    },{
-    "name": "456",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "installType": "d",
-    "deinstallType": "zip",
-    "install": "1D6vJSi0rz6ix2oPLwFk9S2Bai2xOTGiS",
-    "description": "YOUR DESCRIPTION",
-    "size":"1234 MB",
-    "author":"me",
-    "installpath":"/BricksdaleSpeedway.zip",
-    "deinstallpath":"/BricksdaleSpeedway"
     }]
 }
