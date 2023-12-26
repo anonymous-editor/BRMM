@@ -2,7 +2,7 @@
     "mods": [{
     "name": "Bricksdale Speedway",
     "installType": "gd",
-    "deinstallType": "zip"
+    "deinstallType": "zip",
     "install": "1D6vJSi0rz6ix2oPLwFk9S2Bai2xOTGiS",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
     "description": "This map brings the world of American motorsports into Brick Rigs, with realistic props, lighting, Arizonian landscaping, and track layouts. There are many types of motorsports events here, ranging from demolition derbies to oval racing.",
@@ -14,7 +14,7 @@
     "name": "Batt's Showroom",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
     "installType": "gd",
-    "deinstallType": "zip"
+    "deinstallType": "zip",
     "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
     "description": "This map is designed with excellent lighting conditions in mind and comes with a suite of post-processing options. It's intended for you to take pictures of items to the Steam Workshop. Make sure to crank up your settings up when you do.",
     "size":"1234 MB",
@@ -25,7 +25,7 @@
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
     "installType": "d",
-    "deinstallType": "pak"
+    "deinstallType": "pak",
     "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
     "description": "YOUR DESCRIPTION",
     "size":"6.94 MB",
@@ -36,7 +36,7 @@
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
     "installType": "d",
-    "deinstallType": "zip"
+    "deinstallType": "zip",
     "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
     "description": "YOUR DESCRIPTION",
     "size":"1234 MB",
@@ -47,7 +47,7 @@
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
     "installType": "d",
-    "deinstallType": "zip"
+    "deinstallType": "zip",
     "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
     "description": "YOUR DESCRIPTION",
     "size":"1234 MB",
