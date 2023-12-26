@@ -6,7 +6,7 @@
 Windows 10/11, 64 bit
 Brick Rigs, version 1.6.1+
 ```
-----------
+
 ## What is This?
 
 ![image](https://github.com/anonymous-editor/BRMM/assets/74514726/5fbc4b7b-179e-4574-82fb-340ac1190fcf)
@@ -15,11 +15,11 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 - Choose and remember your Brick Rigs install path.
 - Install and/or extract mods to subdirectories in that path.
 - Display prompts about if the mod is installed/not, etc.
-
-### Mod Showcase
-
-HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 ----------
+### Mod Showcase
+----------
+HUGE thanks to Andi_pog for making this vid to showcase BRMM.
+
 ## Install Guide:
 
 > [!IMPORTANT]
