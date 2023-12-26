@@ -13,6 +13,7 @@ import zipfile
 import requests
 import subprocess
 
+import urllib.request
 from urllib.request import urlopen # load file from github
 import json # fetch file
 
@@ -24,78 +25,9 @@ root.withdraw()
 
 # Fetch data from url
 # TODO Fill this data
-
-#url = ""
-#response1 = urlopen(url)
-#text = response1.read()
-
-# Test Data (TO BE REMOVED)
-testdata = """
-{
-    "mods": [{
-    "name": "123",
-    "installType": "gd",
-    "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "description": "YOUR DESCRIPTION",
-    "size":"1234 MB",
-    "author":"me",
-    "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
-    },{
-    "name": "456",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "installType": "d",
-    "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
-    "description": "YOUR DESCRIPTION",
-    "size":"1234 MB",
-    "author":"me",
-    "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
-    },{
-    "name": "456",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "installType": "d",
-    "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
-    "description": "YOUR DESCRIPTION",
-    "size":"1234 MB",
-    "author":"me",
-    "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
-    },{
-    "name": "456",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "installType": "d",
-    "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
-    "description": "YOUR DESCRIPTION",
-    "size":"1234 MB",
-    "author":"me",
-    "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
-    },{
-    "name": "456",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "installType": "d",
-    "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
-    "description": "YOUR DESCRIPTION",
-    "size":"1234 MB",
-    "author":"me",
-    "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
-    }]
-}
-"""
-
-# JSON loading
-data = json.loads(testdata)
-
-
-
-
-
-
-
-
+dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/publicmoddata.json"
+response = urllib.request.urlopen(dataurl)
+data = json.loads(response.read().decode('utf-8'))
 
 # App Frame Code
 
@@ -379,6 +311,6 @@ for i in range(len(data["mods"])):
         button = ctk.CTkButton(frame_10, command=lambda: download_discord_zipfile('https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?', f'{modpath}\\Mods\\AdvancedScopes.zip'), **install_button())
         button.pack(**install_button_packing())
     # TODO replace string with mod[...]
-    button = ctk.CTkButton(frame_10, command=lambda: removepakfile(f"{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak"), **remove_button())
+    button = ctk.CTkButton(frame_10, command=lambda: removepakfile(f'{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak'), **remove_button())
     button.pack(**remove_button_packing())
 app.mainloop()
