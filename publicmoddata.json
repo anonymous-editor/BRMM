@@ -65,5 +65,26 @@
     "author":"lord_bondrewd",
     "installpath":"/Airstrike.zip",
     "deinstallpath":"/Airstrike"
+    },{
+    "name": "Knife",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M7.png",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "1y5QEsYv1HCeNGna2O9RYtDmuNlTNdnzc",
+    "description": "This mod features knives, which are paintable. They have the same 'brick-built' aesthetic found in other high-quality mods. The knife itself works by 'shooting' a weak bullet at a target when triggered with the left mouse button.",
+    "size":"1.38 MB",
+    "author":"batt",
+    "installpath":"/batt_knife.zip",
+    "deinstallpath":"/batt_kinfe"
+    },{
+    "name": "Clouds",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M8.png",
+    "installType": "gd",
+    "deinstallType": "gdpak",
+    "install": "1SRmDYR2DLU2YQbCzs2ExBz_huj1GkLQv",
+    "description": "This mod replaces the in-game weather system with a realistic alternative. It also changes the Sun's size to be more life-like, and even comes with a moon phase and a space background. It's also very customizable.",
+    "size":"241 MB",
+    "author":"andi_pog",
+    "installpath":"/APRS-WindowsNoEditor_P.pak",
     }]
 }
