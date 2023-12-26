@@ -16,7 +16,7 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 - Install and/or extract mods to subdirectories in that path.
 - Display prompts about if the mod is installed/not, etc.
 
-### Mod Showcase
+### _Mod Showcase_
 
 HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
@@ -35,7 +35,11 @@ BRMM is made entirely in **Python 3.12** to handle the file operations and the G
 
 To use BRMM, download `BRMM1xx_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
 
-## Source Code:
+## Contributing to BRMM
+
+Anyone (who wants to improve BRMM) can make pull requests to `BRMM_100.py`. Be sure to provide a description of what you want to change however, so that it is more likely to be approved. This is a **semi-community project**, so please don't fork the project into another public repository.
+
+## Running BRMM From Source Code:
 
 The source code is included as `BRMM_latest.py` and `BRMM_100.py` for those who want it. All dependencies are listed as `imports` at the top of each script.
 
