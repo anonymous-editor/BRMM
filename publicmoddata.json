@@ -8,8 +8,8 @@
     "description": "This map brings the world of American motorsports into Brick Rigs, with realistic props, lighting, Arizonian landscaping, and track layouts. There are many types of motorsports events here, ranging from demolition derbies to oval racing.",
     "size":"167 MB",
     "author":"batt",
-    "installpath":"/Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"/Mods/BricksdaleSpeedway"
+    "installpath":"//Mods/BricksdaleSpeedway.zip",
+    "deinstallpath":"//Mods/BricksdaleSpeedway"
     },{
     "name": "Batt's Showroom",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -19,8 +19,8 @@
     "description": "This map is designed with excellent lighting conditions in mind and comes with a suite of post-processing options. It's intended for you to take pictures of items to the Steam Workshop. Make sure to crank up your settings up when you do.",
     "size":"1234 MB",
     "author":"batt",
-    "installpath":"/Mods/batt_showroom.zip",
-    "deinstallpath":"/Mods/batt_showroom"
+    "installpath":"//Mods/batt_showroom.zip",
+    "deinstallpath":"//Mods/batt_showroom"
     },{
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -30,8 +30,8 @@
     "description": "YOUR DESCRIPTION",
     "size":"6.94 MB",
     "author":"me",
-    "installpath":"/Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"/Mods/BricksdaleSpeedway"
+    "installpath":"//Mods/BricksdaleSpeedway.zip",
+    "deinstallpath":"//Mods/BricksdaleSpeedway"
     },{
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -41,8 +41,8 @@
     "description": "YOUR DESCRIPTION",
     "size":"1234 MB",
     "author":"me",
-    "installpath":"/Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"/Mods/BricksdaleSpeedway"
+    "installpath":"//Mods/BricksdaleSpeedway.zip",
+    "deinstallpath":"//Mods/BricksdaleSpeedway"
     },{
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -52,7 +52,7 @@
     "description": "YOUR DESCRIPTION",
     "size":"1234 MB",
     "author":"me",
-    "installpath":"/Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"/Mods/BricksdaleSpeedway"
+    "installpath":"//Mods/BricksdaleSpeedway.zip",
+    "deinstallpath":"//Mods/BricksdaleSpeedway"
     }]
 }
