@@ -17,32 +17,32 @@
     "deinstallType": "zip",
     "install": "1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
     "description": "This map is designed with excellent lighting conditions in mind and comes with a suite of post-processing options. It's intended for you to take pictures of items to the Steam Workshop. Make sure to crank up your settings up when you do.",
-    "size":"1234 MB",
+    "size":"6.94 MB",
     "author":"batt",
     "installpath":"/batt_showroom.zip",
     "deinstallpath":"/batt_showroom"
     },{
-    "name": "456",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "installType": "d",
-    "deinstallType": "pak",
-    "install": "1D6vJSi0rz6ix2oPLwFk9S2Bai2xOTGiS",
-    "description": "YOUR DESCRIPTION",
-    "size":"6.94 MB",
-    "author":"me",
-    "installpath":"/BricksdaleSpeedway.zip",
-    "deinstallpath":"/BricksdaleSpeedway"
-    },{
-    "name": "456",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
-    "installType": "d",
+    "name": "FNAF Map/Mod",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M3.png",
+    "installType": "gd",
     "deinstallType": "zip",
-    "install": "1D6vJSi0rz6ix2oPLwFk9S2Bai2xOTGiS",
-    "description": "YOUR DESCRIPTION",
-    "size":"1234 MB",
-    "author":"me",
-    "installpath":"/BricksdaleSpeedway.zip",
-    "deinstallpath":"/BricksdaleSpeedway"
+    "install": "1z9TrMazaFOLkTJ8r4h5lWJ1lkLq6QzLr",
+    "description": "This map is a replica of 'Five Nights At Freddy's,' a classic horror game. In Brick Rigs, the map has it's own custom gamemode to suit the map. There's even a way to cook and eat pizzas from within the map, along with many other high-quality details.",
+    "size":"56.7 MB",
+    "author":"lord_bondrewd",
+    "installpath":"/FNAF1.zip",
+    "deinstallpath":"/FNAF1"
+    },{
+    "name": "Vanilla Content Expansion",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "1RnQKGILY8f-v8Cq8Hpp-acye_bRsTE0v",
+    "description": "This mod features over 10 new, develepor-quality weapons, weapon paints, and even a new 'Awooga Car Horn.' The ten weapons encompass primary, secondary, and special weapon types. However, be careful about joining multiplayer servers without this mod.",
+    "size":"98.4 MB",
+    "author":"kvthetank",
+    "installpath":"/VanillaContentExpansion.zip",
+    "deinstallpath":"/VanillaContentExpansion"
     },{
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
