@@ -17,20 +17,24 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 - Install and/or extract mods to subdirectories in that path.
 - Display prompts about if the mod is installed/not, etc.
 
-## How Does it Work?
-
-> [!IMPORTANT]
-> Your antivirus may prevent you from downloading or running this program. This is a false positive.
-
-BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
-
-To use BRMM, download `BRMM1xx_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
-
 ### Mod Showcase
 
 HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
+## How Does it Work?
 
+> [!IMPORTANT]
+> Your antivirus may prevent you from downloading or running this program. This is a false positive, so feel free to make an exception for BRMM in your antivirus.
+
+> [!TIP]
+> To completely exit out of BRMM, close all of its GUI windows, plus the console window.
+
+> [!TIP]
+> I'd recommend keeping the program files within the `BRMM` folder to avoid glitches when starting the app. 
+
+BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
+
+To use BRMM, download `BRMM1xx_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.0.0).
 
 ### Source Code
 
