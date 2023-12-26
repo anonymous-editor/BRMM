@@ -19,7 +19,8 @@ This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick R
 
 ## How Does it Work?
 
-[!IMPORTANT] Your antivirus may prevent you from downloading or running this program. This is a false positive.
+> [!IMPORTANT]
+> Your antivirus may prevent you from downloading or running this program. This is a false positive.
 
 BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
 
