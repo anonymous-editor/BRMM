@@ -9,7 +9,7 @@
     "size":"167 MB",
     "author":"batt",
     "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
+    "deinstallpath":"/Mods/BricksdaleSpeedway"
     },{
     "name": "Batt's Showroom",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -20,7 +20,7 @@
     "size":"1234 MB",
     "author":"batt",
     "installpath":"Mods/batt_showroom.zip",
-    "deinstallpath":"Mods/batt_showroom"
+    "deinstallpath":"/Mods/batt_showroom"
     },{
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -31,7 +31,7 @@
     "size":"6.94 MB",
     "author":"me",
     "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
+    "deinstallpath":"/Mods/BricksdaleSpeedway"
     },{
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -42,7 +42,7 @@
     "size":"1234 MB",
     "author":"me",
     "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
+    "deinstallpath":"/Mods/BricksdaleSpeedway"
     },{
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
@@ -53,6 +53,6 @@
     "size":"1234 MB",
     "author":"me",
     "installpath":"Mods/BricksdaleSpeedway.zip",
-    "deinstallpath":"Mods/BricksdaleSpeedway"
+    "deinstallpath":"/Mods/BricksdaleSpeedway"
     }]
 }
