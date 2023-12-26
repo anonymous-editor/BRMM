@@ -79,8 +79,8 @@
     },{
     "name": "Clouds",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M8.png",
-    "installType": "gd",
-    "deinstallType": "gdpak",
+    "installType": "gdpak",
+    "deinstallType": "pak",
     "install": "1SRmDYR2DLU2YQbCzs2ExBz_huj1GkLQv",
     "description": "This mod replaces the in-game weather system with a realistic alternative. It also changes the Sun's size to be more life-like, and even comes with a moon phase and a space background. It's also very customizable.",
     "size":"241 MB",
