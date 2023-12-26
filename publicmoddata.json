@@ -43,5 +43,27 @@
     "author":"kvthetank",
     "installpath":"/VanillaContentExpansion.zip",
     "deinstallpath":"/VanillaContentExpansion"
+    },{
+    "name": "Black Theme",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M5.png",
+    "installType": "d",
+    "deinstallType": "zip",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1181849071930060831/BlackTheme.zip?",
+    "description": "This is the first Brick Rigs mod to add a new color scheme to the user interface. It is 'simple,' according to the publisher himself. Not much else can be said about this mod, besides it's minimal size of only ~530 KB.",
+    "size":"526.07 KB",
+    "author":"Redacted_xd",
+    "installpath":"/BlackTheme.zip",
+    "deinstallpath":"/BlackTheme"
+    },{
+    "name": "Airstrike",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M6.png",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "1QvqNwaJJvweAr1eKNzNpVWseFEsj36iq",
+    "description": "Another first for Brick Rigs are nukes, not the ones that kids use to troll in public servers, but instead, ones that can be spawned in by players for a less laggy experience. These explosives are classified as 'weapons' in their selection menu, which have some quirks to them.",
+    "size":"47.8 MB",
+    "author":"lord_bondrewd",
+    "installpath":"/Airstrike.zip",
+    "deinstallpath":"/Airstrike"
     }]
 }
