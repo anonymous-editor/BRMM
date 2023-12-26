@@ -25,7 +25,7 @@
     "name": "456",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/M1.PNG",
     "installType": "d",
-    "deinstallType": "zip"
+    "deinstallType": "pak"
     "install": "h1q8GpP2iiuEkmNDHihcQnn-K7Y0HP_pUy",
     "description": "YOUR DESCRIPTION",
     "size":"6.94 MB",
