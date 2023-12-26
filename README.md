@@ -53,12 +53,5 @@ To actually run the script, you'll need the following dependecies:
 
   Instructions to install things via `pip` can be found [here](https://pip.pypa.io/en/stable/installation/)
 
-  Once you're done with everything, you should be able to simplt 
-
-## Possible Improvements:
-- Add content wrapping so the app fits more window sizes.
-- Add light mode support.
-- Improve loading times.
-- Improve HiDPI support.
-- Improve GUI rendering.
+  Once you're done with everything, you should be able to simply open the python script and run the application normally.
 
