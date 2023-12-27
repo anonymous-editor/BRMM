@@ -7,7 +7,7 @@ To open the script from source, you'll need:
 - `Python 3.12`
 
 To actually run the script, you'll need the following dependecies:
-- `pip` (Package Manger to install everything below)
+- `pip`
 - `customtkinter`
 - `pillow `
 - `gdown`
