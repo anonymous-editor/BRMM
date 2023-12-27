@@ -25,7 +25,7 @@ Let's group each category into two parts: `frontend`, and `backend`.
 
 ## Backend JSON Code:
 
-### installType/deinstallType:
+### "installType/deinstallType":
 The first option is `installType`, which has 4 total options. This assigns an ID to the mod that lets the script download the mod correctly.
 - `gd` (Google Drive download, `.zip ` format).
 - `gdpak` (Google Drive download, `.pak` format).
@@ -36,7 +36,7 @@ The next option is `deinstallType`, which lets the script remove the mod correct
 - `zip`
 - `pak`
 
-### install
+### "install"
 
 After the two options is `install`, which provides the URL for downloading the mod. This depends on if the mod is being downloaded through Discord, or through Google Drive.
 
@@ -46,4 +46,16 @@ After the two options is `install`, which provides the URL for downloading the m
 - Discord: Provide everything in the file attachment's url up to and including the `?` symbol. Another example is provided below.
     * Original URL: `https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?ex=65998963&is=65871463&hm=797a20e50d5b7d1ba18e31048b97484174ede19056c0142bd659361d72d0fda1&`
     * Modified URL: `https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?`
-      
+
+### "installpath/deinstallpath"
+
+The last few options for functionality are the `installpath` and `deinstallpath` options for naming the downloaded files. Naming these options depends on how you packaged your mod in Unreal Engine.
+
+- If your mod is a `.zip` file:
+    1. Copy/Paste the zip file's name (with `.zip`).
+    2. Add a `/` to the beginning of the file's name.
+    3. Insert the edited name into `installpath`
+    4. Insert the same value into `deinstallpath`, but without `.zip` at the end of it.
+
+- If your mod is a `.pak' file:
+    2. 
