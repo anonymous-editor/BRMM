@@ -12,3 +12,7 @@ To actually run the script, you'll need the following dependecies:
 - `pillow `
 - `gdown`
 - `requests`
+
+Instructions to install things via `pip` can be found [here](https://pip.pypa.io/en/stable/installation/)
+
+Once you're done with everything, you should be able to simply open the python script and run the application normally.
