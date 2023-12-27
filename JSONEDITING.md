@@ -53,9 +53,19 @@ The last few options for functionality are the `installpath` and `deinstallpath`
 
 - If your mod is a `.zip` file:
     1. Copy/Paste the zip file's name (with `.zip`).
-    2. Add a `/` to the beginning of the file's name.
+    2. Add a `/` to the beginning of the file's name (don't rename the actual file when you do this).
     3. Insert the edited name into `installpath`
     4. Insert the same value into `deinstallpath`, but without `.zip` at the end of it.
 
 - If your mod is a `.pak' file:
-    2. 
+    1. Copy/Paste the pak file's name (with `.pak`).
+    2. Add a `/` to the beginning of the file's name (don't rename the actual file when you do this).
+    3. Insert the edited name into both `installpath` and `deinstallpath`.
+
+## Frontend JSON Code:
+
+- `name`: Simply put your name of your Brick Rigs mod, in **plain text only**
+- `image`: This is something that only mod contributors can change.
+- `description`: Type in a short, meaningful description to your mod/map here, keep it somewhat professional.
+- `size`: Type in the size your mod takes up (on your hard drive) in either KB, MB, or GB.
+- `author`: Type in your preferred name, most people use their Discord username.
