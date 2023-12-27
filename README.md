@@ -9,7 +9,7 @@ Brick Rigs, version 1.6.1+
 
 ## What is This?
 
-![image](https://github.com/anonymous-editor/BRMM/assets/74514726/5fbc4b7b-179e-4574-82fb-340ac1190fcf)
+![Screenshot 2023-12-26 202023](https://github.com/anonymous-editor/BRMM/assets/74514726/ed92b550-aba1-4302-8e46-388b5694a7de)
 
 This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick Rigs. It can:
 - Load all mod entries in the GUI through the web.
