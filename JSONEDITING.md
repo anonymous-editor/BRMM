@@ -5,7 +5,7 @@
 - A fully working, public mod that is uploaded directly through Discord or Google Drive.
 - The mod MUST be compatible for Brick Rigs, version 1.6 and up.
 
-BRMM requires that you edit `publicmoddata.json` to add another mod to BRMM. Here's an overview of the format used in BRMM's GUI:
+BRMM requires that you edit `publicmoddata.json` to add another mod entry to BRMM. Here's an overview of the format used in BRMM's GUI:
 
 
 
