@@ -87,5 +87,16 @@
     "author":"andi_pog",
     "installpath":"/APRS-WindowsNoEditor_P.pak",
     "deinstallpath":"/APRS-WindowsNoEditor_P.pak"
+    },{
+    "name": "Advanced Sights",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/M9.png",
+    "installType": "d",
+    "deinstallType": "zip",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?",
+    "description": "This 'simple' mod adds a scope with cool night visibility and several custom features. You're able to control the scope through various mouse controls. There's also a way to control the scope mode. More features to this mod are coming soon!",
+    "size":"8.94 MB",
+    "author":"Redacted_xd",
+    "installpath":"/AdvancedScopes.zip",
+    "deinstallpath":"/AdvancedScopes"
     }]
 }
