@@ -67,7 +67,7 @@ The last few options for functionality are the `installpath` and `deinstallpath`
     3. Insert the edited name into `installpath`
     4. Insert the same value into `deinstallpath`, but without `.zip` at the end of it.
 
-- If your mod is a `.pak' file:
+- If your mod is a `.pak` file:
     1. Copy/Paste the pak file's name (with `.pak`).
     2. Add a `/` to the beginning of the file's name (don't rename the actual file when you do this).
     3. Insert the edited name into both `installpath` and `deinstallpath`.
@@ -88,4 +88,3 @@ Send a pull request to `publicmoddata.json` containing JSON code formatted as sh
 
 ## Credits:
 - [KoT3isGood](https://github.com/KoT3isGood): Creating a draft of implementing JSON code into BRMM.
-
