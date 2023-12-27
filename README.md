@@ -9,8 +9,6 @@ Brick Rigs, version 1.6.1+
 
 ## What is This?
 
-![Screenshot 2023-12-26 202023](https://github.com/anonymous-editor/BRMM/assets/74514726/ed92b550-aba1-4302-8e46-388b5694a7de)
-
 This is BRMM, an unoficcial, 'plug and play' mod management solution for Brick Rigs. It can:
 - Load all mod entries in the GUI through the web.
 - Choose and remember your Brick Rigs install path.
@@ -34,7 +32,15 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
 BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
 
-To use BRMM, download `BRMM1xx_x64.exe` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/latest).
+To use BRMM, download `BRMM1xx_x64.zip` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/latest).
+
+Once BRMM launches, you should see two windows as shown below:
+
+![image](https://github.com/anonymous-editor/BRMM/assets/74514726/bd679eff-7177-4b00-9541-353afe3efa52)
+
+![Screenshot 2023-12-26 202023](https://github.com/anonymous-editor/BRMM/assets/74514726/ed92b550-aba1-4302-8e46-388b5694a7de)
+
+You can use the terminal to check if your download operations are successful or not.
 
 ## Contributing to BRMM
 
