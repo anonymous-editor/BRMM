@@ -1,6 +1,6 @@
 ## Running BRMM From Source Code:
 
-The source code is included as `BRMM_latest.py` and `BRMM_100.py` for those who want it. All dependencies are listed as `imports` at the top of each script.
+The source code is included as `BRMM_latest.py` and for those who want it. All dependencies are listed as `imports` at the top of each script.
 
 To open the script from source, you'll need:
 - An IDE (I just used `Visual Studio Code`)
