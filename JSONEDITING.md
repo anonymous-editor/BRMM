@@ -36,6 +36,14 @@ The next option is `deinstallType`, which lets the script remove the mod correct
 - `zip`
 - `pak`
 
-  
+### install
 
-  These options choose how 
+After the two options is `install`, which provides the URL for downloading the mod. This depends on if the mod is being downloaded through Discord, or through Google Drive.
+
+- Google Drive: Provide the file ID, after `/file/d/` in the URL. An example is provided below.
+      ![image](https://github.com/anonymous-editor/BRMM/assets/74514726/b7355507-a2c7-4a20-a6d6-5237a09087c6)
+
+- Discord: Provide everything in the file attachment's url up to and including the `?` symbol. Another example is provided below.
+    * Original URL: `https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?ex=65998963&is=65871463&hm=797a20e50d5b7d1ba18e31048b97484174ede19056c0142bd659361d72d0fda1&`
+    * Modified URL: `https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?`
+      
