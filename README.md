@@ -1,4 +1,4 @@
-![BobFace](https://github.com/anonymous-editor/BRMM/assets/74514726/b133e26e-4029-47d5-9dab-91d125767b20)
+![BobFace](https://github.com/anonymous-editor/BRMM/assets/74514726/b133e26e-4029-47d5-9dab-91d125767b20 =512x512)
 
 # BRMM
 
