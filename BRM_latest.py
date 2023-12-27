@@ -2,16 +2,16 @@
 
 # Dependencies #
 import tkinter as tk
-from tkinter import messagebox
 import customtkinter as ctk
 from customtkinter import filedialog, CTk, CTkLabel
 from PIL import Image, ImageTk
 from io import BytesIO
+
 import os
 import gdown
 import zipfile
 import requests
-import subprocess
+import shutil
 
 import urllib.request
 from urllib.request import urlopen # load file from github
@@ -19,9 +19,6 @@ import json # fetch file
 
 root = tk.Tk()
 root.withdraw()
-
-
-
 
 # Fetch data from url
 # TODO Fill this data
@@ -64,19 +61,32 @@ def W4():
     
 if not os.path.isfile('modpath.txt'):
     
-    modpath = filedialog.askdirectory(title="Select your 'BrickRigs' folder to continue.")
+    modpath = filedialog.askdirectory(title="Select your 'Mods' folder to continue.")
     with open('modpath.txt', 'w') as f:
         
         f.write(modpath)
-
-    W4()
         
 else:
     
     with open('modpath.txt', 'r') as f:
         
         modpath = f.read()
+
+if not os.path.isfile('pakspath.txt'):
+    
+    pakspath = filedialog.askdirectory(title="Select your 'Paks' folder to continue.")
+    with open('pakspath.txt', 'w') as e:
         
+        e.write(pakspath)
+    
+    W4()
+    
+else:
+    
+    with open('pakspath.txt', 'r') as e:
+        
+        pakspath = e.read()
+   
 # Button Controllers #
 
 def alreadyexists():
@@ -112,7 +122,7 @@ def download_googledrive_zipfile(file_id, destination):
     url = f"https://drive.google.com/uc?id={file_id}"
     
     gdown.download(url, destination, quiet=False)
-
+         
     with zipfile.ZipFile(destination, 'r') as zip_ref:
         
         zip_ref.extractall(os.path.dirname(destination))
@@ -120,7 +130,7 @@ def download_googledrive_zipfile(file_id, destination):
     W2()
 
 def download_googledrive_pakfile(file_id, destination):
-    
+
     if os.path.exists(destination):
             
             alreadyexists()
@@ -247,39 +257,16 @@ def notexists():
       
     awindow.mainloop()
 
-def remove_file(file_path, folder_path):
-        
-        if not os.path.exists(file_path):
-            
-            notexists()
-
-            return app
-            
-        subprocess.run(["del", file_path], shell=True, check=True)
-        subprocess.run(["rmdir", "/S", "/Q", folder_path], shell=True, check=True)
-
-        usuccessmessage()
-        
-        return app
-
-def removepakfile(file_path):
-        
-        if not os.path.exists(file_path):
-            
-            notexists()
-
-            return app
-            
-        subprocess.run(["del", file_path], shell=True, check=True)
-
-        usuccessmessage()
-        
-        return app
-
 # UI Stuff #
 title = ctk.CTkLabel(scrollable_frame, text="Available Mods:", font=("Segoe UI Semibold", 48), anchor="nw")
 title.grid(row=0, column=0, padx=15, pady=15)
 
+def W5():
+    tk.messagebox.showwarning("Warning", "Your mod type is not supported for Brick Rigs, check for any errors")
+
+def command_func():
+    remove_file(file_path1, folder_path1)
+ 
 for i in range(len(data["mods"])):
     mod = data["mods"][i]
     frame_10 = create_frame(scrollable_frame)
@@ -287,7 +274,7 @@ for i in range(len(data["mods"])):
 
     textbox_16 = ctk.CTkLabel(frame_10, text=mod["name"], **mod_title_font())
     textbox_16.pack(anchor="center", padx=10, pady=10)
-
+    
     # TODO: replace with better solution
     response = requests.get(mod["image"]) # too slow
     image_path = Image.open(BytesIO(response.content))
@@ -303,14 +290,51 @@ for i in range(len(data["mods"])):
     textbox_17.pack(anchor="center", padx=30, pady=15)
 
     if mod["installType"] == "gd": # gd = Google Drive
-        # TODO replace string with mod[...]
-        button = ctk.CTkButton(frame_10, command=lambda: download_googledrive_pakfile('1SRmDYR2DLU2YQbCzs2ExBz_huj1GkLQv', f'{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak'), **install_button())
+        destination = os.path.join(modpath, mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_googledrive_zipfile(file_id, destination), **install_button())
         button.pack(**install_button_packing())
-    if mod["installType"] == "d": # d = Discord
-        # TODO replace string with mod[...]
-        button = ctk.CTkButton(frame_10, command=lambda: download_discord_zipfile('https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?', f'{modpath}\\Mods\\AdvancedScopes.zip'), **install_button())
+
+    elif mod["installType"] == "gdpak":
+        destination = os.path.join(pakspath, mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_googledrive_pakfile(url, destination), **install_button())
         button.pack(**install_button_packing())
-    # TODO replace string with mod[...]
-    button = ctk.CTkButton(frame_10, command=lambda: removepakfile(f'{modpath}\\Content\\Paks\\APRS-WindowsNoEditor_P.pak'), **remove_button())
-    button.pack(**remove_button_packing())
+    
+    elif mod["installType"] == "d": # d = Discord
+        destination = os.path.join(modpath, mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_discord_zipfile(url, destination), **install_button())
+        button.pack(**install_button_packing())
+
+    elif mod["installType"] == "dpak":
+        destination = os.path.join(pakspath, mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_discord_pakfile(file_id, destination), **install_button())
+        button.pack(**install_button_packing())
+
+    if mod["deinstallType"] == "zip":
+        def remove_file(file_path1, folder_path1):
+            if not os.path.exists(file_path1):
+                notexists()
+                return app
+            os.remove(file_path1)
+            shutil.rmtree(folder_path1)
+            usuccessmessage()
+            return app
+
+        file_path1 = f'{modpath}{mod["installpath"]}'
+        folder_path1 = f'{modpath}{mod["deinstallpath"]}'
+        button = ctk.CTkButton(frame_10, command=lambda file_path1=file_path1, folder_path1=folder_path1: remove_file(file_path1, folder_path1), **remove_button())
+        button.pack(**remove_button_packing())
+
+    elif mod["deinstallType"] == "pak":
+        def removepakfile(file_path2):
+            if not os.path.exists(file_path2):
+                notexists()
+                return app
+            os.remove(file_path2)
+            usuccessmessage()
+            return app
+
+        file_path2 = f'{pakspath}{mod["installpath"]}'
+        button = ctk.CTkButton(frame_10, command=lambda file_path2=file_path2: removepakfile(file_path2), **remove_button())
+        button.pack(**remove_button_packing())
+        
 app.mainloop()
