@@ -39,21 +39,6 @@ To use BRMM, download `BRMM1xx_x64.exe` through the "Releases" page or from [thi
 
 Anyone (who wants to improve BRMM) can make pull requests to `BRMM_100.py`. Be sure to provide a description of what you want to change however, so that it is more likely to be approved. This is a **semi-community project**, so please don't fork the project into another public repository.
 
-## Running BRMM From Source Code:
-
-The source code is included as `BRMM_latest.py` and `BRMM_100.py` for those who want it. All dependencies are listed as `imports` at the top of each script.
-
-To open the script from source, you'll need:
-- An IDE (I just used `Visual Studio Code`)
-- `Python 3.12`
-
-To actually run the script, you'll need the following dependecies:
-- `pip` (Package Manger to install everything below)
-- `customtkinter`
-- `pillow `
-- `gdown`
-- `requests`
-
   Instructions to install things via `pip` can be found [here](https://pip.pypa.io/en/stable/installation/)
 
   Once you're done with everything, you should be able to simply open the python script and run the application normally.
