@@ -3,6 +3,9 @@
 BRMM requires that you edit `publicmoddata.json` to add another mod to BRMM. Here's an overview of the format used in BRMM's GUI:
 
 ## Raw JSON Format:
+
+The example comes directly from the first entry of `publicmoddata.json`.
+
 ```
 {
     "name": "Bricksdale Speedway",
@@ -69,3 +72,13 @@ The last few options for functionality are the `installpath` and `deinstallpath`
 - `description`: Type in a short, meaningful description to your mod/map here, keep it somewhat professional.
 - `size`: Type in the size your mod takes up (on your hard drive) in either KB, MB, or GB.
 - `author`: Type in your preferred name, most people use their Discord username.
+
+## Updating BRMM's JSON file:
+Send a pull request to `publicmoddata.json` containing JSON code formatted as shown at the top of this page. Quality checks will be made to ensure that:
+- The mod works in version 1.6 or above.
+- The mod is not "troll content".
+- The mod does not contain any innapropriate content in it.
+
+## Credits:
+- [KoT3isGood](https://github.com/KoT3isGood): Creating a draft of implementing JSON code into BRMM.
+
