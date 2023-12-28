@@ -98,5 +98,16 @@
     "author":"Redacted_xd",
     "installpath":"/AdvancedScopes.zip",
     "deinstallpath":"/AdvancedScopes"
+    },{
+    "name": "Extended Combat",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M10.png",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "1Kif7AdJA3h_ZWK5ayAnnkBMmLa_saI-M",
+    "description": "This mod adds a new combat gamemode, which comes with new teams. It also comes with new textured clothing, and for the first time ever in Brick Rigs, custom helmets, flares, smoke grenades, and body armor. To top it all off, this mod has a flood of weapon attachments.",
+    "size":"100 MB",
+    "author":"lord_bondrewd",
+    "installpath":"/Combat_Extended.zip",
+    "deinstallpath":"/Combat_Extended"
     }]
 }
