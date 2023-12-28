@@ -15,15 +15,17 @@ import requests
 import shutil
 
 import urllib.request
-from urllib.request import urlopen # load file from github
-import json # fetch file
+from urllib.request import urlopen
+import json
+
+# Customtkinter Backend #
 
 root = tk.Tk()
 root.withdraw()
 
 # JSON Loading: #
 
-dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/publicmoddata.json"
+dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/public_mod_data.json"
 response = urllib.request.urlopen(dataurl)
 data = json.loads(response.read().decode('utf-8'))
 
@@ -56,7 +58,7 @@ def W4():
     save_window.title("Initial Setup Status")
     save_window.geometry("550x165")
 
-    message = CTkLabel(save_window, text="\nBRMM has saved your Brick Rigs install path in your user folder!\n\nFrom now on, you don't have to manually select your 'BrickRigs' folder.\n\nPlease restart BRMM for full functionality.\n", font=("Segoe UI", 16))
+    message = CTkLabel(save_window, text="\nBRMM has saved your Brick Rigs install paths in your BRMM folder!\n\nFrom now on, you don't have to manually select the two folders.\n\nPlease restart BRMM for full functionality.\n", font=("Segoe UI", 16))
     message.pack()
 
     save_window.mainloop()
@@ -83,25 +85,21 @@ else:
 
 # Download Operation Handlers: #
 
-def alreadyexists():
-    awindow = CTk()
-    awindow.title("Mod Status")
-    awindow.geometry("350x110")
-    
-    message = CTkLabel(awindow, text="\nThe mod is already installed into Brick Rigs.\n\nYou can close this window now.\n", font=("Segoe UI", 16))
+def create_message_window(message_text1):
+    window1 = CTk()
+    window1.title("Mod Status")
+    window1.geometry("450x110")
+
+    message = CTkLabel(window1, text=message_text1, font=("Segoe UI", 16))
     message.pack()
       
-    awindow.mainloop()
+    window1.mainloop()
+
+def alreadyexists():
+    create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n")
 
 def W2():
-    alert_window = CTk()
-    alert_window.title("Mod Status")
-    alert_window.geometry("450x110")
-    
-    message = CTkLabel(alert_window, text="\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n", font=("Segoe UI", 16))
-    message.pack()
-      
-    alert_window.mainloop()
+    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
 
 def download_googledrive_zipfile(file_id, destination):
     if os.path.exists(destination):
@@ -164,79 +162,58 @@ def download_discord_pakfile(url, filename):
 # Frame GUI Formatting: #
 
 class ContentFormatting:
+    FRAME_PADDING = {"padx": 30, "pady": 30, "sticky": 'nsew'}
+    MOD_TITLE_FONT = {"font": ("Segoe UI Semibold", 28)}
+    MOD_CONTENT_FONT = {"font": ("Segoe UI Semibold", 28)}
+    INSTALL_BUTTON = {"text": "Install", "font": ("Segoe UI", 18)}
+    REMOVE_BUTTON = {"text": "Remove", "font": ("Segoe UI", 18)}
+    INSTALL_BUTTON_PACKING = {"anchor": "center", "ipady": 5, "pady": 15}
+    REMOVE_BUTTON_PACKING = {"anchor": "center", "ipady": 5, "pady": (0,8)}
+    IMAGE_LABEL = {"text": ""}
+
     @staticmethod
     def create_frame(parent, **kwargs):
         frame = tk.Frame(parent, bg="#003459", padx=10, pady=10, **kwargs)
         return frame
 
     @staticmethod
-    def create_frame_padding():
-        return {"padx": 30, "pady": 30, "sticky": 'nsew'}
-
-    @staticmethod
-    def mod_title_font():
-        return {"font": ("Segoe UI Semibold", 28)}
-
-    @staticmethod
-    def mod_content_font():
-        return {"font": ("Segoe UI Semibold", 28)}
-
-    @staticmethod
-    def install_button():
-        return {"text": "Install", "font": ("Segoe UI", 18)}
-
-    @staticmethod
-    def remove_button():
-        return {"text": "Remove", "font": ("Segoe UI", 18)}
-
-    @staticmethod
-    def install_button_packing():
-        return {"anchor": "center", "ipady": 5, "pady": 15}
-
-    @staticmethod
-    def remove_button_packing():
-        return {"anchor": "center", "ipady": 5, "pady": (0,8)}
-
-    @staticmethod
     def create_image_label(photo):
-        return {"image": photo, "text": ""}
+        label = ContentFormatting.IMAGE_LABEL.copy()
+        label["image"] = photo
+        return label
 
     @staticmethod
     def create_image_label_packing(is_centered):
         return {"anchor": is_centered, "padx": 30, "pady": 15}
 
 create_frame = ContentFormatting.create_frame
-create_frame_padding = ContentFormatting.create_frame_padding
-mod_title_font = ContentFormatting.mod_title_font
-mod_content_font = ContentFormatting.mod_content_font
-install_button = ContentFormatting.install_button
-install_button_packing = ContentFormatting.install_button_packing
-remove_button = ContentFormatting.remove_button
-remove_button_packing = ContentFormatting.remove_button_packing
+create_frame_padding = ContentFormatting.FRAME_PADDING
+mod_title_font = ContentFormatting.MOD_TITLE_FONT
+mod_content_font = ContentFormatting.MOD_CONTENT_FONT
+install_button = ContentFormatting.INSTALL_BUTTON
+install_button_packing = ContentFormatting.INSTALL_BUTTON_PACKING
+remove_button = ContentFormatting.REMOVE_BUTTON
+remove_button_packing = ContentFormatting.REMOVE_BUTTON_PACKING
 create_image_label = ContentFormatting.create_image_label
 create_image_label_packing = ContentFormatting.create_image_label_packing
 
 # Uninstaller: #
 
+def create_message_window1(message_text):
+    window = CTk()
+    window.title("Mod Status")
+    window.geometry("350x110")
+    
+    message = CTkLabel(window, text=message_text, font=("Segoe UI", 16))
+    message.pack()
+      
+    window.mainloop()
+
 def usuccessmessage():
-    success_window = CTk()
-    success_window.title("Mod Status")
-    success_window.geometry("350x110")
-    
-    message = CTkLabel(success_window, text="\nThe mod has been removed from Brick Rigs!\n\nYou can close this window now.\n", font=("Segoe UI", 16))
-    message.pack()
-      
-    success_window.mainloop()
-    
+    create_message_window1("\nThe mod has been removed from Brick Rigs!\n\nYou can close this window now.\n")
+
 def notexists():
-    awindow = CTk()
-    awindow.title("Mod Status")
-    awindow.geometry("350x110")
-    
-    message = CTkLabel(awindow, text="\nThe mod is not installed into Brick Rigs.\n\nYou can close this window now.\n", font=("Segoe UI", 16))
-    message.pack()
-      
-    awindow.mainloop()
+    create_message_window1("\nThe mod is not installed into Brick Rigs.\n\nYou can close this window now.\n")
 
 # Main Window GUI: #
 
@@ -246,9 +223,9 @@ title.grid(row=0, column=0, padx=15, pady=15)
 for i in range(len(data["mods"])):
     mod = data["mods"][i]
     frame_10 = create_frame(scrollable_frame)
-    frame_10.grid(row=2+int(i/3), column=i%3, **create_frame_padding())
+    frame_10.grid(row=2+int(i/3), column=i%3, **create_frame_padding)
 
-    textbox_16 = ctk.CTkLabel(frame_10, text=mod["name"], **mod_title_font())
+    textbox_16 = ctk.CTkLabel(frame_10, text=mod["name"], **mod_title_font)
     textbox_16.pack(anchor="center", padx=10, pady=10)
 
     # Image Scaling Functionality: #
@@ -277,23 +254,23 @@ for i in range(len(data["mods"])):
     
     if mod["installType"] == "gd": # gd = Google Drive
         destination = os.path.join(modpath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_googledrive_zipfile(file_id, destination), **install_button())
-        button.pack(**install_button_packing())
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_googledrive_zipfile(file_id, destination), **install_button)
+        button.pack(**install_button_packing)
 
     elif mod["installType"] == "gdpak":
         destination = os.path.join(pakspath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_googledrive_pakfile(url, destination), **install_button())
-        button.pack(**install_button_packing())
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_googledrive_pakfile(url, destination), **install_button)
+        button.pack(**install_button_packing)
     
     elif mod["installType"] == "d": # d = Discord
         destination = os.path.join(modpath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_discord_zipfile(url, destination), **install_button())
-        button.pack(**install_button_packing())
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_discord_zipfile(url, destination), **install_button)
+        button.pack(**install_button_packing)
 
     elif mod["installType"] == "dpak":
         destination = os.path.join(pakspath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_discord_pakfile(file_id, destination), **install_button())
-        button.pack(**install_button_packing())
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_discord_pakfile(file_id, destination), **install_button)
+        button.pack(**install_button_packing)
 
     # File Removal Managers: #
     
@@ -312,8 +289,8 @@ for i in range(len(data["mods"])):
 
         file_path1 = f'{modpath}{mod["installpath"]}'
         folder_path1 = f'{modpath}{mod["deinstallpath"]}'
-        button = ctk.CTkButton(frame_10, command=lambda file_path1=file_path1, folder_path1=folder_path1: remove_file(file_path1, folder_path1), **remove_button())
-        button.pack(**remove_button_packing())
+        button = ctk.CTkButton(frame_10, command=lambda file_path1=file_path1, folder_path1=folder_path1: remove_file(file_path1, folder_path1), **remove_button)
+        button.pack(**remove_button_packing)
 
     elif mod["deinstallType"] == "pak":
         def removepakfile(file_path2):
@@ -325,7 +302,7 @@ for i in range(len(data["mods"])):
             return app
 
         file_path2 = f'{pakspath}{mod["installpath"]}'
-        button = ctk.CTkButton(frame_10, command=lambda file_path2=file_path2: removepakfile(file_path2), **remove_button())
-        button.pack(**remove_button_packing())
+        button = ctk.CTkButton(frame_10, command=lambda file_path2=file_path2: removepakfile(file_path2), **remove_button)
+        button.pack(**remove_button_packing)
         
 app.mainloop()
