@@ -38,7 +38,6 @@ class MyApp(CTk):
         self.scrollable_frame.grid(row=0, column=0, sticky='nsew', rowspan=7, columnspan=4)
 
 app = MyApp()
-
 scrollable_frame = app.scrollable_frame
 
 # Global Theming: #
@@ -58,120 +57,78 @@ def W4():
 
     save_window.mainloop()
     
-if not os.path.isfile('modpath.txt'):
+if not os.path.isfile('modpath.txt') and not os.path.isfile('pakspath.txt'):
     modpath = filedialog.askdirectory(title="Select your 'Mods' folder to continue.")
     with open('modpath.txt', 'w') as f:
         f.write(modpath)
-        
-else:
-    with open('modpath.txt', 'r') as f:
-        modpath = f.read()
-
-if not os.path.isfile('pakspath.txt'):
+    
     pakspath = filedialog.askdirectory(title="Select your 'Paks' folder to continue.")
     with open('pakspath.txt', 'w') as e:
         e.write(pakspath)
     
     W4()
-    
+
 else:
+    with open('modpath.txt', 'r') as f:
+        modpath = f.read()
+
     with open('pakspath.txt', 'r') as e:
         pakspath = e.read()
 
-# Download Operation Handlers: #
+# Download Controllers: #
 
-def create_message_window(message_text1):
-    window1 = CTk()
-    window1.title("Mod Status")
-    window1.geometry("450x110")
+def create_message_window(message_text):
+    window = CTk()
+    window.title("Mod Status")
+    window.geometry("450x110")
 
-    message = CTkLabel(window1, text=message_text1, font=("Segoe UI", 16))
+    message = CTkLabel(window, text=message_text, font=("Segoe UI", 16))
     message.pack()
-      
-    window1.mainloop()
+        
+    window.mainloop()
 
-def alreadyexists():
-    create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n")
-
-def W2():
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
-
-def download_googledrive_zipfile(file_id, destination):
+def handle_existing_file(destination):
     if os.path.exists(destination):
-            alreadyexists()
+        create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n")
+        return app
 
-            return app
-    
-    url = f"https://drive.google.com/uc?id={file_id}"
-    
-    gdown.download(url, destination, quiet=False)
-         
-    with zipfile.ZipFile(destination, 'r') as zip_ref:
-        zip_ref.extractall(os.path.dirname(destination))
+def download_file(url, destination, download_func):
+    handle_existing_file(destination)
 
-    W2()
+    download_func(url, destination, quiet=False)
 
-def download_googledrive_pakfile(file_id, destination):
-    if os.path.exists(destination):  
-            alreadyexists()
+    if zipfile.is_zipfile(destination):
+        with zipfile.ZipFile(destination, 'r') as zip_ref:
+            zip_ref.extractall(os.path.splitext(destination)[0])
 
-            return app
-    
-    url = f"https://drive.google.com/uc?id={file_id}"
-    
-    gdown.download(url, destination, quiet=False)
-
-    W2()
-
-def download_discord_zipfile(url, filename):   
-    if os.path.exists(filename):
-            alreadyexists()
-
-            return app
-    
-    response = requests.get(url)
-    
-    with open(filename, 'wb') as file:
-        file.write(response.content)
-
-    with zipfile.ZipFile(filename, 'r') as zip_ref:
-        zip_ref.extractall(os.path.dirname(filename))
-
-    W2()
-
-def download_discord_pakfile(url, filename):
-    if os.path.exists(filename):
-            alreadyexists()
-
-            return app
-    
-    response = requests.get(url)
-
-    with open(filename, 'wb') as file:
-        file.write(response.content)
-
-    W2()
+    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
 
     return app
 
-def download_github_zipfile(url, destination):
-    if os.path.exists(destination): 
-        alreadyexists()
+def download_googledrive_zipfile(file_id, destination):
+    download_file(f"https://drive.google.com/uc?id={file_id}", destination, gdown.download)
 
-        return app
+def download_googledrive_pakfile(file_id, destination):
+    download_file(f"https://drive.google.com/uc?id={file_id}", destination, gdown.download)
+
+def download_discord_zipfile(url, filename):  
+    download_file(url, filename, lambda url, destination, quiet: open(destination, 'wb').write(requests.get(url).content))
+
+def download_discord_pakfile(url, filename):
+    download_file(url, filename, lambda url, destination, quiet: requests.get(url).content.write(open(destination, 'wb')))
+
+def download_github_zipfile(url, destination):
+    handle_existing_file(destination)
 
     response = requests.get(url)
 
     with open(destination, 'wb') as out_file:
         out_file.write(response.content)
-        
-    extract_dir = os.path.splitext(destination)[0]
-    os.makedirs(extract_dir, exist_ok=True)
 
     with zipfile.ZipFile(destination, 'r') as zip_ref:
-        zip_ref.extractall(extract_dir)
+        zip_ref.extractall(os.path.splitext(destination)[0])
 
-    W2()
+    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
 
     return app
 
