@@ -24,7 +24,7 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 ## Install Guide:
 
 > [!IMPORTANT]
-> Your antivirus may prevent you from downloading or running this program. This is a false positive, so feel free to make an exception for BRMM in your antivirus.
+> Your antivirus may prevent you from downloading or running this program. This is a false positive, so feel free to make an exception for BRMM in your antivirus. The source code is included for anyone concerned.
 
 > [!TIP]
 > To completely exit out of BRMM, close all of its GUI windows, plus the console window.
@@ -38,7 +38,7 @@ To use BRMM, download `BRMM1xx_x64.zip` through the "Releases" page or from [thi
 
 Once BRMM launches, you should see two windows as shown below:
 
-![image](https://github.com/anonymous-editor/BRMM/assets/74514726/bd679eff-7177-4b00-9541-353afe3efa52)
+![image](https://github.com/anonymous-editor/BRMM/assets/74514726/a9db2e6c-bcf9-4dfe-9473-b9de5dbb7458)
 
 ![Screenshot 2023-12-26 202023](https://github.com/anonymous-editor/BRMM/assets/74514726/ed92b550-aba1-4302-8e46-388b5694a7de)
 
