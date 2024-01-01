@@ -41,6 +41,7 @@ The first option is `installType`, which has 4 total options. This assigns an ID
 - `gdpak` (Google Drive download, `.pak` format).
 - `d` (Direct Discord download, `.zip` format).
 - `dpak` (Direct Discord download, `.pak` format).
+- `github` (Github download, `.zip` format).
 
 The next option is `deinstallType`, which lets the script remove the mod correctly. There are two options here, which are both pretty self explanatory.
 - `zip`
@@ -56,6 +57,8 @@ After the two options is `install`, which provides the URL for downloading the m
 - Discord: Provide everything in the file attachment's url up to and including the `?` symbol. Another example is provided below.
     * Original URL: `https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?ex=65998963&is=65871463&hm=797a20e50d5b7d1ba18e31048b97484174ede19056c0142bd659361d72d0fda1&`
     * Modified URL: `https://cdn.discordapp.com/attachments/751767065970475093/1188166613237772488/AdvancedScopes_RD_BOOSTY.zip?`
+
+- Github: Provide the link by right-clicking on the hyperlink to the zip file, and then copy it into the `install` section.
 
 ### "installpath/deinstallpath"
 
