@@ -18,11 +18,6 @@ import urllib.request
 from urllib.request import urlopen
 import json
 
-# Customtkinter Backend #
-
-root = tk.Tk()
-root.withdraw()
-
 # JSON Loading: #
 
 dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/public_mod_data.json"
@@ -48,8 +43,8 @@ scrollable_frame = app.scrollable_frame
 
 # Global Theming: #
 
-ctk.set_appearance_mode("System")
-ctk.set_default_color_theme("blue")
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("dark-blue")
 
 # Path Variables: #
 
@@ -234,7 +229,7 @@ for i in range(len(data["mods"])):
         user32 = ctypes.windll.user32
         dpi = user32.GetDpiForSystem()
         return dpi / 96
-
+    
     scaling_factor = get_scaling_factor()
 
     response = requests.get(mod["image"])
