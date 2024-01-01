@@ -27,9 +27,6 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 > Your antivirus may prevent you from downloading or running this program. This is a false positive, so feel free to make an exception for BRMM in your antivirus. The source code is included for anyone concerned.
 
 > [!TIP]
-> To completely exit out of BRMM, close all of its GUI windows, plus the console window.
-
-> [!TIP]
 > I'd recommend keeping the program files within the `BRMM` folder to avoid glitches when starting the app. 
 
 BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
