@@ -154,6 +154,27 @@ def download_discord_pakfile(url, filename):
 
     return app
 
+def download_github_zipfile(url, destination):
+    if os.path.exists(destination): 
+        alreadyexists()
+
+        return app
+
+    response = requests.get(url)
+
+    with open(destination, 'wb') as out_file:
+        out_file.write(response.content)
+        
+    extract_dir = os.path.splitext(destination)[0]
+    os.makedirs(extract_dir, exist_ok=True)
+
+    with zipfile.ZipFile(destination, 'r') as zip_ref:
+        zip_ref.extractall(extract_dir)
+
+    W2()
+
+    return app
+
 # Frame GUI Formatting: #
 
 class ContentFormatting:
@@ -265,6 +286,11 @@ for i in range(len(data["mods"])):
     elif mod["installType"] == "dpak":
         destination = os.path.join(pakspath, mod["installpath"])
         button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_discord_pakfile(file_id, destination), **install_button)
+        button.pack(**install_button_packing)
+
+    elif mod["installType"] == "github":
+        destination = os.path.join(modpath, mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_github_zipfile(url, destination), **install_button)
         button.pack(**install_button_packing)
 
     # File Removal Managers: #
