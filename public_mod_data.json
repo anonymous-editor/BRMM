@@ -109,5 +109,16 @@
     "author":"lord_bondrewd",
     "installpath":"/Combat_Extended.zip",
     "deinstallpath":"/Combat_Extended"
+    },{
+    "name": "Virtual Reality Plugin",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M11.png",
+    "installType": "github",
+    "deinstallType": "zip",
+    "install": "https://github.com/praydog/UEVR/releases/download/1.0/UEVR.zip",
+    "description": "This utility is an advanced DLL injector that helps convert Unreal Engine 4/5 games to be VR-compatible. .",
+    "size":"36.7 MB",
+    "author":"praydog, narknon, & cursey",
+    "installpath":"/UEVR.zip",
+    "deinstallpath":"/UEVR"
     }]
 }
