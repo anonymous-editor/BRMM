@@ -111,7 +111,7 @@
     "deinstallpath":"/Combat_Extended"
     },{
     "name": "UEVR",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M-11.png",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M11.png",
     "installType": "github",
     "deinstallType": "zip",
     "install": "https://github.com/praydog/UEVR/releases/download/1.0/UEVR.zip",
