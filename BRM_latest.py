@@ -96,10 +96,10 @@ def download_file(url, destination, download_func):
     handle_existing_file(destination)
 
     download_func(url, destination, quiet=False)
-
+    
     if zipfile.is_zipfile(destination):
         with zipfile.ZipFile(destination, 'r') as zip_ref:
-            zip_ref.extractall(os.path.splitext(destination)[0])
+            zip_ref.extractall(os.path.dirname(destination))
 
     create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
 
