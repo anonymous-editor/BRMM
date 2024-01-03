@@ -120,5 +120,16 @@
     "author":"praydog, narknon, & cursey",
     "installpath":"/UEVR.zip",
     "deinstallpath":"/UEVR"
+    },{
+    "name": "Editor Size Unlocker",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M11.png",
+    "installType": "dpak",
+    "deinstallType": "pak",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1139546110852071484/EditorSizesUnlocker_P.pak?]",
+    "description": "This utility is an advanced DLL injector that helps convert Unreal Engine 4/5 games to be VR-compatible. One of those games includes Brick Rigs. UEVR comes with mulltiple rendering options, all while being easy to use. All rights to UEVR belong to the authors below.",
+    "size":"2.98 KB",
+    "author":"Redacted_xd",
+    "installpath":"/EditorSizesUnlocker_P.pak",
+    "deinstallpath":"/EditorSizesUnlocker_P.pak"
     }]
 }
