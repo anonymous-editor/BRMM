@@ -105,17 +105,11 @@ def download_file(url, destination, download_func):
 
     return app
 
-def download_googledrive_zipfile(file_id, destination):
+def download_googledrive_file(file_id, destination):
     download_file(f"https://drive.google.com/uc?id={file_id}", destination, gdown.download)
 
-def download_googledrive_pakfile(file_id, destination):
-    download_file(f"https://drive.google.com/uc?id={file_id}", destination, gdown.download)
-
-def download_discord_zipfile(url, filename):  
+def download_discord_file(url, filename):  
     download_file(url, filename, lambda url, destination, quiet: open(destination, 'wb').write(requests.get(url).content))
-
-def download_discord_pakfile(url, filename):
-    download_file(url, filename, lambda url, destination, quiet: requests.get(url).content.write(open(destination, 'wb')))
 
 def download_github_zipfile(url, destination):
     handle_existing_file(destination)
@@ -227,22 +221,22 @@ for i in range(len(data["mods"])):
     
     if mod["installType"] == "gd": # gd = Google Drive
         destination = os.path.join(modpath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_googledrive_zipfile(file_id, destination), **install_button)
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_googledrive_file(file_id, destination), **install_button)
         button.pack(**install_button_packing)
 
     elif mod["installType"] == "gdpak":
         destination = os.path.join(pakspath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_googledrive_pakfile(url, destination), **install_button)
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_googledrive_file(url, destination), **install_button)
         button.pack(**install_button_packing)
     
     elif mod["installType"] == "d": # d = Discord
         destination = os.path.join(modpath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_discord_zipfile(url, destination), **install_button)
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_discord_file(url, destination), **install_button)
         button.pack(**install_button_packing)
 
     elif mod["installType"] == "dpak":
         destination = os.path.join(pakspath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_discord_pakfile(file_id, destination), **install_button)
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_discord_file(file_id, destination), **install_button)
         button.pack(**install_button_packing)
 
     elif mod["installType"] == "github":
