@@ -66,6 +66,17 @@
     "installpath":"/Airstrike.zip",
     "deinstallpath":"/Airstrike"
     },{
+    "name": "hehe.pak",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M12.png",
+    "installType": "gdpak",
+    "deinstallType": "pak",
+    "install": "1M6iLJRtqPdz_bJfsOsUuSjXxAqyjO3XJ",
+    "description": "Released before 1.6, this mod makes player-collision explosions look realistic. ",
+    "size":"546 MB",
+    "author":"lord_bondrewd",
+    "installpath":"/hehe_P.pak",
+    "deinstallpath":"/hehe_P.pak"
+    },{
     "name": "Knife",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M7.png",
     "installType": "gd",
@@ -122,7 +133,7 @@
     "deinstallpath":"/UEVR"
     },{
     "name": "Editor Size Unlocker",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M11.png",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M12png",
     "installType": "dpak",
     "deinstallType": "pak",
     "install": "https://cdn.discordapp.com/attachments/751767065970475093/1139546110852071484/EditorSizesUnlocker_P.pak?]",
