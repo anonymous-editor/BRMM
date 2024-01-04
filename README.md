@@ -51,7 +51,7 @@ You can run BRMM from source by using [these instructions](https://github.com/an
 
 ### GUI:
 
-You can add mod entries to BRMM through [this `.md` file](https://github.com/anonymous-editor/BRMM/blob/main/SOURCECODE.md). All instructions are provided in the link.
+You can add mod entries to BRMM through [this `.md` file](https://github.com/anonymous-editor/BRMM/blob/main/JSONEDITING.md). All instructions are provided in the link.
 
 ## Credits:
 - [KoT3isGood](https://github.com/KoT3isGood): Created a draft of implementing JSON code into BRMM, along with creating other commits.
