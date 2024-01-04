@@ -133,7 +133,7 @@
     "deinstallpath":"/UEVR"
     },{
     "name": "Editor Size Unlocker",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M12png",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M12.png",
     "installType": "dpak",
     "deinstallType": "pak",
     "install": "https://cdn.discordapp.com/attachments/751767065970475093/1139546110852071484/EditorSizesUnlocker_P.pak?]",
