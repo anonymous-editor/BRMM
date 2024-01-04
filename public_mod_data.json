@@ -78,7 +78,7 @@
     "deinstallpath":"/hehe_P.pak"
     },{
     "name": "Nutty Fire and FX",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M14.png",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M15.png",
     "installType": "gdpak",
     "deinstallType": "pak",
     "install": "192JpyiYvbh7Rkgrx-lcfUqNopQGDhxo",
@@ -147,7 +147,7 @@
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M12.png",
     "installType": "dpak",
     "deinstallType": "pak",
-    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1139546110852071484/EditorSizesUnlocker_P.pak?]",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1139546110852071484/EditorSizesUnlocker_P.pak?",
     "description": "This small mod lets you build larger creations by expanding the editor's physical limits. There's even an option for you to choose the size of the in-game editor, up to 30,000 'studs' on all three axes. The best ",
     "size":"2.98 KB",
     "author":"Redacted_xd",
