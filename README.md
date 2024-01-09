@@ -21,7 +21,9 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 
 HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/N1n8hyOlo_k" title="Easier installation method for 1.6+ Brick Rigs Mods! (BRMM)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p align="center">
+  <iframe width="1280" height="720" src="https://www.youtube.com/embed/N1n8hyOlo_k" title="Easier installation method for 1.6+ Brick Rigs Mods! (BRMM)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</p>
 
 ## Install Guide:
 
