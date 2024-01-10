@@ -20,7 +20,7 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 ## Mod Showcase:
 
 > [!TIP]
-> Be sure to open the video in a new tab because it will override this website.
+> Be sure to open the video in a new tab.
 
 HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
