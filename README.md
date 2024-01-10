@@ -6,7 +6,7 @@
 
 ```
 Windows 10/11, 64 bit
-Brick Rigs, version 1.6.1+
+Brick Rigs, version 1.6+
 ```
 
 ## What is This?
