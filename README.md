@@ -21,9 +21,7 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 
 HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
-<p href="http://www.youtube.com/watch?feature=player_embedded&v=N1n8hyOlo_k" target="_blank" align="center">
- <img src="http://img.youtube.com/vi/N1n8hyOlo_k/mqdefault.jpg" alt="Watch the video" width="1280" height="720" border="10" />
-</p>
+{% include youtube.html id="JLMbpiywVxQ" %}
 
 ## Install Guide:
 
