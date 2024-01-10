@@ -23,7 +23,7 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM. Be sure to open th
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=N1n8hyOlo_k" target="_blank" rel="noopener noreferrer">
-     <img src="https://img.youtube.com/vi/N1n8hyOlo_k/maxresdefault.jpg" alt="Image Alt Text">
+     <img src="https://img.youtube.com/vi/N1n8hyOlo_k/maxresdefault.jpg" alt="Video">
   </a>
 </p>
 
