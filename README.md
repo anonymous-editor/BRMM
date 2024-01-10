@@ -40,7 +40,7 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
 BRMM is made entirely in **Python 3.12.1** to handle the file operations and the GUI.
 
-To use BRMM, download `BRMM1xx_x64.zip` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/latest).
+To use BRMM, download `BRMM1xx_x64.zip` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.5.0).
 
 Once BRMM launches, you should see two windows as shown below:
 
