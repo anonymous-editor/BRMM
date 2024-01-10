@@ -21,7 +21,7 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 
 HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 
-{% include youtube.html id="N1n8hyOlo_k" %}
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID "Video Title")
 
 ## Install Guide:
 
@@ -31,7 +31,7 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 > [!TIP]
 > I'd recommend keeping the program files within the `BRMM` folder to avoid glitches when starting the app. 
 
-BRMM is made entirely in **Python 3.12** to handle the file operations and the GUI.
+BRMM is made entirely in **Python 3.12.1** to handle the file operations and the GUI.
 
 To use BRMM, download `BRMM1xx_x64.zip` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/latest).
 
