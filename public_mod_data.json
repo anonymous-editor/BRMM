@@ -155,7 +155,7 @@
     "deinstallpath":"/EditorSizesUnlocker_P.pak"
     },{
     "name": "Unturned Bob Faces",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M16.png",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M1-6.png",
     "installType": "dpak",
     "deinstallType": "pak",
     "install": "https://cdn.discordapp.com/attachments/751767065970475093/1195069550115438714/UnturnedStyleFacesV2_P.pak?",
@@ -166,7 +166,7 @@
     "deinstallpath":"/UnturnedStyleFacesV2_P.pak"
     },{
     "name": "Brickkisser Bob Face",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M17.png",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M1-7.png",
     "installType": "dpak",
     "deinstallType": "pak",
     "install": "https://cdn.discordapp.com/attachments/751767065970475093/1166850557881880668/bricker_P.pak?",
