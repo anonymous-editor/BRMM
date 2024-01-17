@@ -186,5 +186,16 @@
     "author":"mad and Gollygusher",
     "installpath":"/gollyawesomefacemod_P.pak",
     "deinstallpath":"/gollyawesomefacemod_P.pak"
+    },{
+    "name": "Squad Sounds",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M19.png",
+    "installType": "dpak",
+    "deinstallType": "pak",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1162716898924974141/Squad_P.pak?",
+    "description": "Originally released for Brick Rigs 1.0, this mod replaces many sounds for Brick Rigs, including the ones for weapons, certain engines, footsteps, and so on. It also replaces the main menu's sound. As a final note, it even changes the explosion fade distance.",
+    "size":"17.96 MB",
+    "author":".re1axxx and kotofyt",
+    "installpath":"/Squad_P.pak",
+    "deinstallpath":"/Squad_P.pak"
     }]
 }
