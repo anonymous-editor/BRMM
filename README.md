@@ -36,7 +36,7 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 > Your antivirus may prevent you from downloading or running this program. This is a false positive, so feel free to make an exception for BRMM in your antivirus. The source code is included for anyone concerned.
 
 > [!TIP]
-> When you close the settings app, you **will** get an error that reads:
+> When you close the settings menu, you **will** get an error that reads:
 > ```
 > File "c:\Users\%username%\path\to\BRMMxxx.exe", line 195, in apply_changes
 >   selected_option = self.dropdown_menu.get()
@@ -57,7 +57,8 @@ To use BRMM, download `BRMM1xx_x64.zip` through the "Releases" page or from [thi
 
 Once BRMM launches, you should see two windows as shown below:
 
-![Screenshot 2023-12-26 202023](https://github.com/anonymous-editor/BRMM/assets/74514726/ed92b550-aba1-4302-8e46-388b5694a7de)
+![image](https://github.com/anonymous-editor/BRMM/assets/74514726/69b0ac0c-48f1-4ad9-9c40-8ee34b0967ed)
+![image](https://github.com/anonymous-editor/BRMM/assets/74514726/4157a823-a96b-4511-9103-d611eb6e6b07)
 
 You can use the terminal to check if your download operations are successful or not.
 
