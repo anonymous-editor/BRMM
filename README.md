@@ -36,20 +36,20 @@ HUGE thanks to Andi_pog for making this vid to showcase BRMM.
 > Your antivirus may prevent you from downloading or running this program. This is a false positive, so feel free to make an exception for BRMM in your antivirus. The source code is included for anyone concerned.
 
 > [!TIP]
-> If you get an error that reads:
-> 
-> `
->     selected_option = self.dropdown_menu.get()
-                      ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\prane\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\customtkinter\windows\widgets\ctk_combobox.py", line 397, in get
-    return self._entry.get()
-           ^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.496.0_x64__qbz5n2kfra8p0\Lib\tkinter\__init__.py", line 3124, in get
-    return self.tk.call(self._w, 'get')
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-_tkinter.TclError: invalid command name ".!ctkframe.!canvas.!ctkscrollableframe.!ctkframe17.!optionswindow.!ctktabview.!ctkframe.!ctkframe.!ctkcombobox.!entry"
-`
-> when you close the settings app, this 
+> When you close the settings app, you **will** get an error that reads:
+> ```
+> File "c:\Users\%username%\path\to\BRMMxxx.exe", line 195, in apply_changes
+>   selected_option = self.dropdown_menu.get()
+>                      ^^^^^^^^^^^^^^^^^^^^^^^^
+> File "C:\Users\%username%\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\customtkinter\windows\widgets\ctk_combobox.py", line 397, in get
+>    return self._entry.get()
+>           ^^^^^^^^^^^^^^^^^
+> File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.496.0_x64__qbz5n2kfra8p0\Lib\tkinter\__init__.py", line 3124, in get
+>   return self.tk.call(self._w, 'get')
+>          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> _tkinter.TclError: invalid command name ".!ctkframe.!canvas.!ctkscrollableframe.!ctkframe17.!optionswindow.!ctktabview.!ctkframe.!ctkframe.!ctkcombobox.!entry"
+> ```
+> This error is **NOT** a bug and only warns you about trying to edit a value that the app is using. If you change anything in the settings menu, you have to restart BRMM for your changes to apply correctly.
 
 BRMM is made entirely in **Python 3.12.1** to handle the file operations and the GUI.
 
