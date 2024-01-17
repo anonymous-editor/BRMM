@@ -162,7 +162,7 @@
     "description": "This mod changes Bob's face to look like the ones from Unturned and modified ones to fit the game. The zombies also get revamped faces that makes them look wasted and drunk. The mod also works with both 1.5 and 1.6, but cannot be used with other face mods.",
     "size":"684.7 KB",
     "author":"mad",
-    "installpath":"/UnturnedStyleFacesV2_P.pak"
+    "installpath":"/UnturnedStyleFacesV2_P.pak",
     "deinstallpath":"/UnturnedStyleFacesV2_P.pak"
     },{
     "name": "Brickkisser Bob Face",
@@ -173,8 +173,8 @@
     "description": "This mod changes Bob's face to have an anime-like aesthetic. This mod is completely original, and the facial expressions are quite vivid. Like mad's other face mod, it also works with both 1.5 and 1.6, but cannot be used with other face mods.",
     "size":"684.7 KB",
     "author":"mad",
-    "installpath":"/bricker_P.pak?"
-    "deinstallpath":"/bricker_P.pak?"
+    "installpath":"/bricker_P.pak",
+    "deinstallpath":"/bricker_P.pak"
     },{
     "name": "gollyawesomefacemod.pak",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M15.png",
@@ -184,7 +184,7 @@
     "description": "This is yet another face mod by mad, which makes Bob look like someone who smoked his way into smiley faces. It is horrendous to look at, but does provide a nice twist to the two other face mods. Once again, be sure to only use one face mod at a time.",
     "size":"384,32 KB",
     "author":"mad",
-    "installpath":"/gollyawesomefacemod_P.pak?"
-    "deinstallpath":"/gollyawesomefacemod_P.pak?"
+    "installpath":"/gollyawesomefacemod_P.pak",
+    "deinstallpath":"/gollyawesomefacemod_P.pak"
     }]
 }
