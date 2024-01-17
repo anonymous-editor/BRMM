@@ -7,7 +7,7 @@ To open the script from source, you'll need:
 - `Python 3.12`
 
 To actually run the script, you'll need the following dependecies:
-- ```
+  ```
   customtkinter
   pillow (Python Imaging Library)
   googleapiclient
