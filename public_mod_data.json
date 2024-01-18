@@ -197,5 +197,16 @@
     "author":".re1axxx and kotofyt",
     "installpath":"/Squad_P.pak",
     "deinstallpath":"/Squad_P.pak"
+    },{
+    "name": "Expanded Conquest",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M20.png",
+    "installType": "d",
+    "deinstallType": "zip",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1197355829200953455/ExpandedConquest.zip?",
+    "description": "Made by a man who specializes in military-style gameplay in Brick Rigs, this mod improves the conquest mode for Bricksville. Differences from the vanilla conquest mode include tougher objectives, use of the entire map, new tactics, and realistic budget settings.",
+    "size":"98.9 MB",
+    "author":".kvthetank and atomicdude",
+    "installpath":"/ExpandedConquest.zip",
+    "deinstallpath":"/ExpandedConquest"
     }]
 }
