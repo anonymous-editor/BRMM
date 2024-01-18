@@ -17,6 +17,8 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 - Install and/or extract mods to those paths.
 - Display prompts about if the mod is installed/not, etc.
 
+For those concerned about this app, a [privacy policy](https://github.com/anonymous-editor/BRMM/blob/main/PRIVACYPOLICY.mdhttps://github.com/anonymous-editor/BRMM/releases/tag/1.5.0) and [terms and conditions document](https://github.com/anonymous-editor/BRMM/releases/tag/1.5.0) are included.
+
 ## Mod Showcase:
 
 > [!TIP]
