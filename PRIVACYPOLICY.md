@@ -10,7 +10,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
 **Information Collection and Use**
 
-For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to This app collects data related to downloading Google Drive files as applicable within BRMM's effective usage., Your consent to associate your Google account with BRMM does not collect personal data, and only saves your authorization record through a '.token' file., This file is only intended to prevent multiple sign-in's with the Brick Rigs Mod Manager.. The information that I request will be retained on your device and is not collected by me in any way.
+For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to This app collects data related to downloading Google Drive files as applicable within BRMM's effective usage. Your consent to associate your Google account with BRMM does not collect personal data, and only saves your authorization record through a '.pickle' file. This file is only intended to prevent multiple sign-in's with the Brick Rigs Mod Manager. In other words, the .pickle is purely a convienience measure. The information that I request will be retained on your device and is not collected by me in any way.
 
 **Log Data**
 
