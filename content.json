@@ -1,5 +1,6 @@
 {
     "mods": [{
+    "type": "map",
     "name": "Bricksdale Speedway",
     "installType": "gd",
     "deinstallType": "zip",
@@ -12,6 +13,7 @@
     "deinstallpath":"/BricksdaleSpeedway"
     },{
     "name": "Batt's Showroom",
+    "type": "map",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M2.png",
     "installType": "gd",
     "deinstallType": "zip",
@@ -23,6 +25,7 @@
     "deinstallpath":"/batt_showroom"
     },{
     "name": "FNAF Map/Mod",
+    "type": "map",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M3.png",
     "installType": "gd",
     "deinstallType": "zip",
@@ -34,6 +37,7 @@
     "deinstallpath":"/FNAF1"
     },{
     "name": "Vanilla Content Expansion",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M4.png",
     "installType": "gd",
     "deinstallType": "zip",
@@ -45,6 +49,7 @@
     "deinstallpath":"/VanillaContentExpansion"
     },{
     "name": "Black Theme",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M5.png",
     "installType": "d",
     "deinstallType": "zip",
@@ -56,6 +61,7 @@
     "deinstallpath":"/BlackTheme"
     },{
     "name": "Airstrike",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M6.png",
     "installType": "gd",
     "deinstallType": "zip",
@@ -67,6 +73,7 @@
     "deinstallpath":"/Airstrike"
     },{
     "name": "hehe.pak",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M14.png",
     "installType": "gdpak",
     "deinstallType": "pak",
@@ -78,6 +85,7 @@
     "deinstallpath":"/hehe_P.pak"
     },{
     "name": "Nutty Fire and FX",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M15.png",
     "installType": "gdpak",
     "deinstallType": "pak",
@@ -89,6 +97,7 @@
     "deinstallpath":"/NuttyFireAndFX_P.pak"
     },{
     "name": "Knife",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M7.png",
     "installType": "gd",
     "deinstallType": "zip",
@@ -100,6 +109,7 @@
     "deinstallpath":"/batt_knife"
     },{
     "name": "Clouds",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M8.png",
     "installType": "gdpak",
     "deinstallType": "pak",
@@ -111,6 +121,7 @@
     "deinstallpath":"/APRS-WindowsNoEditor_P.pak"
     },{
     "name": "Advanced Sights",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M9.png",
     "installType": "d",
     "deinstallType": "zip",
@@ -122,6 +133,7 @@
     "deinstallpath":"/AdvancedScopes"
     },{
     "name": "Extended Combat",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M10.png",
     "installType": "gd",
     "deinstallType": "zip",
@@ -133,6 +145,7 @@
     "deinstallpath":"/Combat_Extended"
     },{
     "name": "UEVR",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M11.png",
     "installType": "github",
     "deinstallType": "zip",
@@ -144,6 +157,7 @@
     "deinstallpath":"/UEVR"
     },{
     "name": "Editor Size Unlocker",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M12.png",
     "installType": "dpak",
     "deinstallType": "pak",
@@ -155,6 +169,7 @@
     "deinstallpath":"/EditorSizesUnlocker_P.pak"
     },{
     "name": "Unturned Bob Faces",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M1-6.png",
     "installType": "dpak",
     "deinstallType": "pak",
@@ -166,6 +181,7 @@
     "deinstallpath":"/UnturnedStyleFacesV2_P.pak"
     },{
     "name": "Brickkisser Bob Face",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M1-7.png",
     "installType": "dpak",
     "deinstallType": "pak",
@@ -177,6 +193,7 @@
     "deinstallpath":"/bricker_P.pak"
     },{
     "name": "gollyawesomefacemod.pak",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M18.png",
     "installType": "dpak",
     "deinstallType": "pak",
@@ -188,6 +205,7 @@
     "deinstallpath":"/gollyawesomefacemod_P.pak"
     },{
     "name": "Squad Sounds",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M19.png",
     "installType": "dpak",
     "deinstallType": "pak",
@@ -199,6 +217,7 @@
     "deinstallpath":"/Squad_P.pak"
     },{
     "name": "Expanded Conquest",
+    "type": "gameplay",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M20.png",
     "installType": "d",
     "deinstallType": "zip",
