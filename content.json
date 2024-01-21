@@ -1,6 +1,6 @@
 {
     "mods": [{
-    "type": "Map",
+    "type": "Maps",
     "name": "Bricksdale Speedway",
     "installType": "gd",
     "deinstallType": "zip",
@@ -13,7 +13,7 @@
     "deinstallpath":"/BricksdaleSpeedway"
     },{
     "name": "Batt's Showroom",
-    "type": "Map",
+    "type": "Maps",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M2.png",
     "installType": "gd",
     "deinstallType": "zip",
@@ -25,7 +25,7 @@
     "deinstallpath":"/batt_showroom"
     },{
     "name": "FNAF Map/Mod",
-    "type": "Map",
+    "type": "Maps",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M3.png",
     "installType": "gd",
     "deinstallType": "zip",
