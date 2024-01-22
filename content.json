@@ -55,7 +55,7 @@
     "name": "Black Theme",
     "type": "Visual",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M5.png",
-    "local_image": "/Images/M5.png"
+    "local_image": "/Images/M5.png",
     "installType": "d",
     "deinstallType": "zip",
     "install": "https://cdn.discordapp.com/attachments/751767065970475093/1181849071930060831/BlackTheme.zip?",
