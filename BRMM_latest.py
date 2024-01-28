@@ -13,19 +13,20 @@ import requests
 import shutil
 
 from googleapiclient.http import MediaIoBaseDownload
-import googleapiclient.discovery
 import os.path
 import pickle
 from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 
-import urllib.request
+import configparser
+import urllib
 from urllib.request import urlopen
 import json
 
 # JSON Loading: #
 
-dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/public_mod_data.json"
+dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/content.json"
 response = urllib.request.urlopen(dataurl)
 data = json.loads(response.read().decode('utf-8'))
 
@@ -38,76 +39,76 @@ class MyApp(CTk):
         self.geometry("1920x1080")
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
+        self.iconbitmap('BRMM_ico.ico')
         
         self.scrollable_frame = ctk.CTkScrollableFrame(master=self)
-        self.scrollable_frame.grid(row=0, column=0, sticky='nsew', rowspan=7, columnspan=4)
+        self.scrollable_frame.grid(row=0, column=0, sticky='nsew', rowspan=2, columnspan=1)
 
 app = MyApp()
 scrollable_frame = app.scrollable_frame
 
-# Global Theming: #
+# INI Config: #
 
-try:
-    with open('theme.txt', 'r') as file:
-        theme = file.read().strip()
-except (FileNotFoundError, ValueError):
-    theme = "dark-blue"
+config = configparser.ConfigParser()
+config.read('settings.ini')
 
-ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme(theme)
+if not os.path.isfile('settings.ini'):
+    modpath = filedialog.askdirectory(title="Select your 'Mods' folder to continue.")
+    pakspath = filedialog.askdirectory(title="Select your 'Paks' folder to continue.")
 
-# Path Variables: #
+    config['PATHS'] = {'modpath': modpath, 'pakspath': pakspath}
+    config['UI'] = {'columns': 3, 'theme': "dark-blue"}
 
-def W4():
+    with open('settings.ini', 'w') as configfile:
+        config.write(configfile)
+
     save_window = CTk()
     save_window.title("Initial Setup Status")
     save_window.geometry("550x165")
+    save_window.iconbitmap('BRMM_ico.ico')
 
     message = CTkLabel(save_window, text="\nBRMM has saved your Brick Rigs install paths in your BRMM folder!\n\nFrom now on, you don't have to manually select the two folders.\n\nPlease restart BRMM for full functionality.\n", font=("Segoe UI", 16))
     message.pack()
 
     save_window.mainloop()
-    
-if not os.path.isfile('modpath.txt') and not os.path.isfile('pakspath.txt'):
-    modpath = filedialog.askdirectory(title="Select your 'Mods' folder to continue.")
-    with open('modpath.txt', 'w') as f:
-        f.write(modpath)
-    
-    pakspath = filedialog.askdirectory(title="Select your 'Paks' folder to continue.")
-    with open('pakspath.txt', 'w') as e:
-        e.write(pakspath)
-    
-    W4()
 
 else:
-    with open('modpath.txt', 'r') as f:
-        modpath = f.read()
+    config.read('settings.ini')
 
-    with open('pakspath.txt', 'r') as e:
-        pakspath = e.read()
+    modpath = config['PATHS']['modpath']
+    pakspath = config['PATHS']['pakspath']
+    theme = config['UI']['theme']
+    number = config['UI']['columns']
+
+# Global Theming: #
+
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme(theme)
+
+# Settings Windows: #
 
 class OptionsWindow(ctk.CTkToplevel):
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.title("Settings")       
         self.bind("<Destroy>", self.apply_changes)
-        print("OptionsWindow initialized")
-
+        self.iconbitmap('BRMM_ico.ico')
 
         self.modspath_var = tk.StringVar()
         self.pakspath_var = tk.StringVar()
 
         # Mechanism to display the current mod/pak folder paths: #
 
-        with open('modpath.txt', 'r') as f:
-            self.modspath_var.set(f.read())
-        with open('pakspath.txt', 'r') as e:
-            self.pakspath_var.set(e.read())
+        config.read('settings.ini')
+
+        self.modspath_var.set(config['PATHS']['modpath'])
+        self.pakspath_var.set(config['PATHS']['pakspath'])
 
         # UI Organization: #
 
         tab_view = ctk.CTkTabview(self)
         tab_view.pack(fill='both', expand=True)
+
         tab1 = tab_view.add("UI")
         tab2 = tab_view.add("Paths")
 
@@ -122,11 +123,7 @@ class OptionsWindow(ctk.CTkToplevel):
 
         # Column changer widget: #
 
-        try:
-            with open('columns_value.txt', 'r') as file:
-                current_value = int(file.read().strip())
-        except (FileNotFoundError, ValueError):
-            current_value = 2
+        current_value = int(config['UI']['columns'])
 
         dropdown_label = ctk.CTkLabel(frame1, text="DISCLAIMER: Any changes you make here will only apply when you restart BRMM.\n\nNumber of columns:", font=("Segoe UI", 16), wraplength=250)
         dropdown_label.pack(pady=5)
@@ -147,17 +144,11 @@ class OptionsWindow(ctk.CTkToplevel):
         self.selected_theme = tk.StringVar()
         self.theme_menu = ctk.CTkComboBox(frame1, values=self.theme_options)
         self.theme_menu.pack()
-       
-        try:
-            with open('theme.txt', 'r') as file:
-                current_theme = file.read().strip()
-        except (FileNotFoundError, ValueError):
-            current_theme = "dark-blue"
 
-        self.theme_menu.set(current_theme)
-        self.selected_theme.set(current_theme)
+        self.theme_menu.set(theme)
+        self.selected_theme.set(theme)
 
-        apply_theme_button = ctk.CTkButton(frame1, text="(Apply Theme", command=self.apply_theme_changes, font=("Segoe UI", 14))
+        apply_theme_button = ctk.CTkButton(frame1, text="Apply Theme", command=self.apply_theme_changes, font=("Segoe UI", 14))
         dropdown_label.pack(pady=5)
         apply_theme_button.pack(pady=10, ipady=5)
     
@@ -182,121 +173,39 @@ class OptionsWindow(ctk.CTkToplevel):
     def browse_modpath(self):
         path = filedialog.askdirectory(title="Select your 'Mods' folder.")
         self.modspath_var.set(path)
-        with open('modpath.txt', 'w') as f:
-            f.write(path)
+        config.read('settings.ini')
+        config['PATHS']['modpath'] = path
+        with open('settings.ini', 'w') as configfile:
+            config.write(configfile)
 
     def browse_pakspath(self):
         path = filedialog.askdirectory(title="Select your 'Paks' folder.")
         self.pakspath_var.set(path)
-        with open('pakspath.txt', 'w') as e:
-            e.write(path)
+        config.read('settings.ini')
+        config['PATHS']['pakspath'] = path
+        with open('settings.ini', 'w') as configfile:
+            config.write(configfile)
 
     def apply_changes(self, event=None):
         selected_option = self.dropdown_menu.get()
-        with open('columns_value.txt', 'w') as file:
-            file.write(str(int(selected_option)))
+        config.read('settings.ini')
+        config['UI']['columns'] = str(int(selected_option))
+        with open('settings.ini', 'w') as configfile:
+            config.write(configfile)
 
     def apply_theme_changes(self):
         selected_theme = self.theme_menu.get()
-        with open('theme.txt', 'w') as file:
-            file.write(selected_theme)
-    
+        config.read('settings.ini')
+        config['UI']['theme'] = selected_theme
+        with open('settings.ini', 'w') as configfile:
+            config.write(configfile)
+            
     # Window Launcher: #
 
     def open_options_window(parent):
         OptionsWindow(parent)
 
 options_window = OptionsWindow.open_options_window
-
-try:
-    with open('columns_value.txt', 'r') as file:
-        number = int(file.read().strip())
-except (FileNotFoundError, ValueError):
-    number = 2
-
-# Download Controllers: #
-
-def create_message_window(message_text):
-    window = CTk()
-    window.title("Mod Status")
-    window.geometry("450x110")
-
-    message = CTkLabel(window, text=message_text, font=("Segoe UI", 16))
-    message.pack()
-        
-    window.mainloop()
-
-def handle_existing_file(destination):
-    if os.path.exists(destination):
-        create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n")
-        return app
-
-def download_file(url, destination, download_func):
-    handle_existing_file(destination)
-
-    download_func(url, destination, quiet=False)
-    
-    if zipfile.is_zipfile(destination):
-        with zipfile.ZipFile(destination, 'r') as zip_ref:
-            zip_ref.extractall(os.path.dirname(destination))
-
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
-
-    return app
-
-def download_googledrive_file(file_id, destination):
-    handle_existing_file(destination)
-
-    creds = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'client_secret_721310632565-2i4qb11ui3lsgv7c2541cmeom0c51dai.apps.googleusercontent.com.json', ['https://www.googleapis.com/auth/drive.readonly'])
-            creds = flow.run_local_server(port=0)
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
-    service = googleapiclient.discovery.build('drive', 'v3', credentials=creds)
-
-    request = service.files().get_media(fileId=file_id)
-    fh = open(destination, 'wb')
-    downloader = MediaIoBaseDownload(fh, request)
-    done = False
-    while done is False:
-        status, done = downloader.next_chunk()
-        print("Download %d%%." % int(status.progress() * 100))
-    fh.close()
-
-    if zipfile.is_zipfile(destination):
-        with zipfile.ZipFile(destination, 'r') as zip_ref:
-            zip_ref.extractall(os.path.dirname(destination))
-
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
-
-    return app
-
-def download_discord_file(url, filename):  
-    download_file(url, filename, lambda url, destination, quiet: open(destination, 'wb').write(requests.get(url).content))
-
-def download_github_zipfile(url, destination):
-    handle_existing_file(destination)
-
-    response = requests.get(url)
-
-    with open(destination, 'wb') as out_file:
-        out_file.write(response.content)
-
-    if zipfile.is_zipfile(destination):
-        with zipfile.ZipFile(destination, 'r') as zip_ref:
-            zip_ref.extractall(os.path.splitext(destination)[0])
-
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
-
-    return app
 
 # Frame GUI Formatting: #
 
@@ -336,42 +245,67 @@ create_image_label_packing = ContentFormatting.create_image_label_packing
 
 # Uninstaller: #
 
-def create_message_window1(message_text):
+def create_message_window(message_text):
     window = CTk()
     window.title("Mod Status")
-    window.geometry("350x110")
+    window.iconbitmap('BRMM_ico.ico')
     
-    message = CTkLabel(window, text=message_text, font=("Segoe UI", 16))
+    message = CTkLabel(window, text=message_text, font=("Segoe UI", 16), padx=50)
     message.pack()
-      
+       
     window.mainloop()
 
 def usuccessmessage():
-    create_message_window1("\nThe mod has been removed from Brick Rigs!\n\nYou can close this window now.\n")
+    create_message_window("\nThe mod has been removed from Brick Rigs!\n\nYou can close this window now.\n")
 
 def notexists():
-    create_message_window1("\nThe mod is not installed into Brick Rigs.\n\nYou can close this window now.\n")
+    create_message_window("\nThe mod is not installed into Brick Rigs.\n\nYou can close this window now.\n")
 
 # Main Window GUI: #
 
-title = ctk.CTkLabel(scrollable_frame, text="Available Mods:", font=("Segoe UI Semibold", 48), anchor="nw")
+frame = ctk.CTkFrame(scrollable_frame)
+frame.grid(row=0, column=0, rowspan=1, columnspan=2, sticky='nsew')
+
+frame.columnconfigure(0, weight=1)
+frame.columnconfigure(1, weight=1)
+
+title = ctk.CTkLabel(frame, text="Available Mods:", font=("Segoe UI Semibold", 48), anchor="nw")
 title.grid(row=0, column=0, padx=15, pady=15)
 
-for i in range(len(data["mods"])):
-    mod = data["mods"][i]
-    frame_10 = ContentFormatting.create_frame(scrollable_frame)
-    frame_10.grid(row=2+int(i/number), column=i%number, **ContentFormatting.FRAME_PADDING)
+options_button = ctk.CTkButton(frame, text="Settings", command=lambda: OptionsWindow(frame), font=("Segoe UI", 18))
+options_button.grid(row=0, column=1, ipady=5)
+
+# Define the order of the types: #
+
+tab_view = ctk.CTkTabview(scrollable_frame)
+tab_view.grid(row=1, column=0, sticky='nsew')
+types_order = ['Maps', 'Visual', 'Gameplay', 'Items']
+
+tabs = {}
+for type in types_order:
+    if type not in tabs:
+        tabs[type] = tab_view.add(type)
+
+tab_view._segmented_button.grid(sticky="W")
+
+current_positions = {type: {'row': 0, 'col': 0} for type in types_order}
+
+# Populate the tabs with mods: #
+
+for mod in data["mods"]:
+    position = current_positions[mod["type"]]
+
+    frame_10 = ContentFormatting.create_frame(tabs[mod["type"]])
+    frame_10.grid(row=position['row'], column=position['col'], **ContentFormatting.FRAME_PADDING)
+
+    position['col'] += 1
+
+    if position['col'] >= int(number):
+        position['col'] = 0
+        position['row'] += 1
 
     textbox_16 = ctk.CTkLabel(frame_10, text=mod["name"], **ContentFormatting.MOD_TITLE_FONT)
     textbox_16.pack(anchor="center", padx=10, pady=10)
-
-    # Options Button: #
-
-    top_frame = ctk.CTkFrame(scrollable_frame)
-    top_frame.grid(row=0, column=(number)-1)
-
-    options_button = ctk.CTkButton(top_frame, text="Settings", command=lambda: OptionsWindow(top_frame), font=("Segoe UI", 18))
-    options_button.pack(ipady=5)
 
     # Image Loading: #
 
@@ -387,26 +321,93 @@ for i in range(len(data["mods"])):
     textbox_17 = ctk.CTkLabel(frame_10, font=("Segoe UI", 16), text=mod["description"]+"\n\nSize: "+mod["size"]+"\nAuthor: "+mod["author"], wraplength=500)
     textbox_17.pack(anchor="center", padx=30, pady=15)
 
+    # Download Controllers: #
+
+    def handle_existing_file(destination):
+        if os.path.exists(destination):
+            create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n")
+            return app
+
+    def download_file(url, destination, download_func):
+        handle_existing_file(destination)
+
+        download_func(url, destination, quiet=False)
+        
+        if zipfile.is_zipfile(destination):
+            with zipfile.ZipFile(destination, 'r') as zip_ref:
+                zip_ref.extractall(os.path.dirname(destination))
+
+        create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
+
+        return app
+
+    def download_googledrive_file(file_id, destination):
+        handle_existing_file(destination)
+
+        creds = None
+        if os.path.exists('token.pickle'):
+            with open('token.pickle', 'rb') as token:
+                creds = pickle.load(token)
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    'creds.json', ['https://www.googleapis.com/auth/drive.readonly'])
+                creds = flow.run_local_server(port=0)
+            with open('token.pickle', 'wb') as token:
+                pickle.dump(creds, token)
+
+        service = build('drive', 'v3', credentials=creds)
+        request = service.files().get_media(fileId=file_id)
+        fh = open(destination, 'wb')
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while done is False:
+            status, done = downloader.next_chunk()
+            print("Download %d%%." % int(status.progress() * 100))
+        fh.close()
+
+        if zipfile.is_zipfile(destination):
+            with zipfile.ZipFile(destination, 'r') as zip_ref:
+                zip_ref.extractall(os.path.dirname(destination))
+
+        create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
+
+        return app
+        
+    def download_discord_file(url, filename):  
+        download_file(url, filename, lambda url, destination, quiet: open(destination, 'wb').write(requests.get(url).content))
+
+    def download_github_zipfile(url, destination):
+        handle_existing_file(destination)
+
+        response = requests.get(url)
+
+        with open(destination, 'wb') as out_file:
+            out_file.write(response.content)
+
+        if zipfile.is_zipfile(destination):
+            with zipfile.ZipFile(destination, 'r') as zip_ref:
+                zip_ref.extractall(os.path.splitext(destination)[0])
+
+        create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
+
+        return app
+        
     # Download Handlers: #
     
-    if mod["installType"] == "gd": # gd = Google Drive
-        destination = os.path.join(modpath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_googledrive_file(file_id, destination), **install_button)
-        button.pack(**install_button_packing)
+    google_paths = {"gd": modpath, "gdpak": pakspath}
+    discord_paths = {"d": modpath, "dpak": pakspath}
 
-    elif mod["installType"] == "gdpak":
-        destination = os.path.join(pakspath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_googledrive_file(url, destination), **install_button)
+    if mod["installType"] in google_paths:
+        destination = os.path.join(google_paths[mod["installType"]], mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{google_paths[mod["installType"]]}{mod["installpath"]}': download_googledrive_file(file_id, destination), **install_button)
         button.pack(**install_button_packing)
     
-    elif mod["installType"] == "d": # d = Discord
-        destination = os.path.join(modpath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_discord_file(url, destination), **install_button)
-        button.pack(**install_button_packing)
-
-    elif mod["installType"] == "dpak":
-        destination = os.path.join(pakspath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{pakspath}{mod["installpath"]}': download_discord_file(file_id, destination), **install_button)
+    elif mod["installType"] in discord_paths:
+        destination = os.path.join(discord_paths[mod["installType"]], mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{discord_paths[mod["installType"]]}{mod["installpath"]}': download_discord_file(url, destination), **install_button)
         button.pack(**install_button_packing)
 
     elif mod["installType"] == "github":
@@ -416,35 +417,30 @@ for i in range(len(data["mods"])):
 
     # File Removal Managers: #
     
-    def command_func():
-        remove_file(file_path1, folder_path1)
-    
-    if mod["deinstallType"] == "zip":
-        def remove_file(file_path1, folder_path1):
-            if not os.path.exists(file_path1):
-                notexists()
-                return app
-            os.remove(file_path1)
-            shutil.rmtree(folder_path1)
-            usuccessmessage()
+    def remove_file(file_path, folder_path=None):
+        if not os.path.exists(file_path):
+            notexists()
             return app
+        os.remove(file_path)
+        if folder_path and os.path.exists(folder_path):
+            shutil.rmtree(folder_path)
+        usuccessmessage()
+        return app
 
-        file_path1 = f'{modpath}{mod["installpath"]}'
-        folder_path1 = f'{modpath}{mod["deinstallpath"]}'
-        button = ctk.CTkButton(frame_10, command=lambda file_path1=file_path1, folder_path1=folder_path1: remove_file(file_path1, folder_path1), **remove_button)
+    def command_func():
+        remove_file(file_path, folder_path)
+    
+    paths = {"zip": modpath, "pak": pakspath}
+
+    if mod["deinstallType"] == "zip":
+        file_path = f'{paths[mod["deinstallType"]]}{mod["installpath"]}'
+        folder_path = f'{paths[mod["deinstallType"]]}{mod["deinstallpath"]}'
+        button = ctk.CTkButton(frame_10, command=lambda file_path=file_path, folder_path=folder_path: remove_file(file_path, folder_path), **remove_button)
         button.pack(**remove_button_packing)
 
     elif mod["deinstallType"] == "pak":
-        def removepakfile(file_path2):
-            if not os.path.exists(file_path2):
-                notexists()
-                return app
-            os.remove(file_path2)
-            usuccessmessage()
-            return app
-
-        file_path2 = f'{pakspath}{mod["installpath"]}'
-        button = ctk.CTkButton(frame_10, command=lambda file_path2=file_path2: removepakfile(file_path2), **remove_button)
+        file_path = f'{paths[mod["deinstallType"]]}{mod["installpath"]}'
+        button = ctk.CTkButton(frame_10, command=lambda file_path=file_path: remove_file(file_path), **remove_button)
         button.pack(**remove_button_packing)
 
 app.mainloop()
