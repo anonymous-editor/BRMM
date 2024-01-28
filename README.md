@@ -63,11 +63,11 @@ For those of you who want to install mods manually, take a look at Atomic's vid 
 
 BRMM is made entirely in **Python 3.12.1** to handle the file operations and the GUI.
 
-To use BRMM, download `BRMM1xx_x64.zip` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/tag/1.5.0).
+To use BRMM, download `BRMM.zip` through the "Releases" page or from [this link](https://github.com/anonymous-editor/BRMM/releases/latest).
 
 Once BRMM launches, you should see two windows as shown below:
 
-![image](https://github.com/anonymous-editor/BRMM/assets/74514726/69b0ac0c-48f1-4ad9-9c40-8ee34b0967ed)
+![Screenshot 2024-01-28 162653](https://github.com/anonymous-editor/BRMM/assets/74514726/30b49672-5f25-4fda-9af5-844e99521adc)
 ![image](https://github.com/anonymous-editor/BRMM/assets/74514726/4157a823-a96b-4511-9103-d611eb6e6b07)
 
 You can use the terminal to check if your download operations are successful or not.
