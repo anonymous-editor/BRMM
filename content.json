@@ -227,5 +227,17 @@
     "author":".kvthetank and atomicdude",
     "installpath":"/ExpandedConquest.zip",
     "deinstallpath":"/ExpandedConquest"
+    },{
+    "name": "Ashlik's Combat Bricks",
+    "type": "Gameplay",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M21.png",
+    "installType": "d",
+    "deinstallType": "zip",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1199416274715951105/AshiksCustomVehicleCombatBricks.zip?",
+    "description": "This mod adds a smokescreen brick to the editor in Brick Rigs. There are also new gun bricks, detonators, and a fuel tank that is insanely powerful. These new bricks can even be used in multiplayer servers, just so long as the server host has this mod.",
+    "size":"419.54 KB",
+    "author":"ashlik",
+    "installpath":"/SmokeTankGrenadeTest.zip",
+    "deinstallpath":"/SmokeTankGrenadeTest"
     }]
 }
