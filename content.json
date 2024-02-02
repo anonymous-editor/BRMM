@@ -108,7 +108,7 @@
     "installpath":"/batt_knife.zip",
     "deinstallpath":"/batt_knife"
     },{
-    "name": "Clouds (CURRENTLY INCOMPATIBLE)",
+    "name": "Remastered Skies",
     "type": "Visual",
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M8.png",    
     "installType": "gdpak",
