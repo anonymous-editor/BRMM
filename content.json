@@ -230,7 +230,7 @@
     },{
     "name": "Ashik's Combat Bricks",
     "type": "Gameplay",
-    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M21.png",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M22.png",
     "installType": "d",
     "deinstallType": "zip",
     "install": "https://cdn.discordapp.com/attachments/751767065970475093/1199416274715951105/AshiksCustomVehicleCombatBricks.zip?",
@@ -239,5 +239,17 @@
     "author":"ashlik",
     "installpath":"/SmokeTankGrenadeTest.zip",
     "deinstallpath":"/SmokeTankGrenadeTest"
+    },{
+    "name": "Walkable Skyscrapers",
+    "type": "Gameplay",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M21.png",
+    "installType": "dpak",
+    "deinstallType": "pak",
+    "install": "https://cdn.discordapp.com/attachments/751767065970475093/1203343237147009044/SmallTowerRoom_P.pak?",
+    "description": "This small mod lets you walk inside the in-game skyscrapers. The interior is hollow, at least for now. Future additions to this mod include a reception area and multiple floors. Creations can be spawned inside of the buildings, although they will likely break.",
+    "size":"39.66 KB",
+    "author":"mad",
+    "installpath":"/SmallTowerRoom_P.pak",
+    "deinstallpath":"/SmallTowerRoom_P.pak"
     }]
 }
