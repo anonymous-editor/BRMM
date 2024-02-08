@@ -251,5 +251,17 @@
     "author":"mad",
     "installpath":"/SmallTowerRoom_P.pak",
     "deinstallpath":"/SmallTowerRoom_P.pak"
+    },{
+    "name": "Sunshine Airport",
+    "type": "Maps",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M30.png",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "1WPEI-_AgldBtzH1hExRO369DxxWg3Cz6",
+    "description": "This is the first map port from Mariokart into Brick Rigs. It features an emphasis on zero-gravity racing, and has some very pleasing aesthetics. All assets used in making this map belong to Nintendo, the author reserves no right to claim ownership over them.",
+    "size":"25 MB",
+    "author":"loppyster",
+    "installpath":"/SunshineAirport.zip",
+    "deinstallpath":"/SunshineAirport"
     }]
 }
