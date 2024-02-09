@@ -258,8 +258,20 @@
     "installType": "gd",
     "deinstallType": "zip",
     "install": "1WPEI-_AgldBtzH1hExRO369DxxWg3Cz6",
-    "description": "This is the first map port from Mariokart into Brick Rigs. It features an emphasis on zero-gravity racing, and has some very pleasing aesthetics. All assets used in making this map belong to Nintendo, the author reserves no right to claim ownership over them.",
+    "description": "This is the first map port from Mariokart into Brick Rigs, version 1.6. It features an emphasis on zero-gravity racing, and has some very pleasing aesthetics. All assets used in making this map belong to Nintendo, the author reserves no right over them.",
     "size":"25 MB",
+    "author":"loppyster",
+    "installpath":"/SunshineAirport.zip",
+    "deinstallpath":"/SunshineAirport"
+    },{
+    "name": "Mount Warrio",
+    "type": "Maps",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M31.png",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "1BYP6q48U9rwvU5RS-skrV5OePbGNMhx1",
+    "description": "This is a very snowy, zero-gravity racing mountain map ported straight from Mariokart. It is the second map ported into Brick Rigs, version 1.6. All assets used in making this map belong to Nintendo, the author reserves no right over them.",
+    "size":"62.3 MB",
     "author":"loppyster",
     "installpath":"/SunshineAirport.zip",
     "deinstallpath":"/SunshineAirport"
