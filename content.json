@@ -117,8 +117,8 @@
     "description": "This mod replaces the in-game weather system with a realistic alternative. It also changes the Sun's size to be more life-like, and even comes with a moon phase, a space background, and accurate thunderstorms. It's also very customizable.",
     "size":"241 MB",
     "author":"andi_pog",
-    "installpath":"/APRS-WindowsNoEditor_P.pak",
-    "deinstallpath":"/APRS-WindowsNoEditor_P.pak"
+    "installpath":"/APRS_Testing-WindowsNoEditor_P.pak",
+    "deinstallpath":"/APRS_Testing-WindowsNoEditor_P.pak"
     },{
     "name": "Advanced Sights",
     "type": "Items",
