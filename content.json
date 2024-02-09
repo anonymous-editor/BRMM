@@ -113,7 +113,7 @@
     "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M8.png",    
     "installType": "gdpak",
     "deinstallType": "pak",
-    "install": "1SRmDYR2DLU2YQbCzs2ExBz_huj1GkLQv",
+    "install": "1NFslPPcV32LY-Y2dpoffqOKwSBsUGx2V",
     "description": "This mod replaces the in-game weather system with a realistic alternative. It also changes the Sun's size to be more life-like, and even comes with a moon phase, a space background, and accurate thunderstorms. It's also very customizable.",
     "size":"241 MB",
     "author":"andi_pog",
@@ -275,5 +275,29 @@
     "author":"loppyster",
     "installpath":"/MountWarrio.zip",
     "deinstallpath":"/MountWarrio"
+    },{
+    "name": "Bikini Bottom",
+    "type": "Maps",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M32.png",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "14GDKSWvR7XWtyiNyh791n0PjymJJxSwo",
+    "description": "This is Bikini Bottom from the iconic TV show, Spongebob Squarepants. The map is made from numerous ripped assets since there's no definitive layout for the city itself. All rights to the assets in this mod belong to Nintendo and Viacom.",
+    "size":"8.4 MB",
+    "author":"loppyster",
+    "installpath":"/BikiniBottom.zip",
+    "deinstallpath":"/BikiniBottom"
+    },{
+    "name": "Windfall Island",
+    "type": "Maps",
+    "image": "https://github.com/anonymous-editor/BRMM/raw/main/Images/M33.png",
+    "installType": "gd",
+    "deinstallType": "zip",
+    "install": "1NFslPPcV32LY-Y2dpoffqOKwSBsUGx2V",
+    "description": "This map is a port of Winfall Island from The Wind Maker. It features a semi-low-poly island with some interesting assets for the map's layout. As usual, all assets used to make this map belong to Nitendo, the author claims no rights over them.",
+    "size":"3.7 MB",
+    "author":"loppyster",
+    "installpath":"/Windfall.zip",
+    "deinstallpath":"/Windfall"
     }]
 }
