@@ -11,13 +11,10 @@ import os
 import zipfile
 import requests
 import shutil
-
-from googleapiclient.http import MediaIoBaseDownload
 import os.path
-import pickle
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from google.auth.transport.requests import Request
+
+import gdown
+import webbrowser
 
 import configparser
 import urllib
@@ -88,8 +85,8 @@ ctk.set_default_color_theme(theme)
 # Settings Windows: #
 
 class OptionsWindow(ctk.CTkToplevel):
-    def __init__(self, parent, *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
+    def __init__(self, parent=None):
+        super().__init__(parent)
         self.title("Settings")       
         self.bind("<Destroy>", self.apply_changes)
         self.iconbitmap('BRMM_ico.ico')
@@ -272,7 +269,11 @@ frame.columnconfigure(1, weight=1)
 title = ctk.CTkLabel(frame, text="Available Mods:", font=("Segoe UI Semibold", 48), anchor="nw")
 title.grid(row=0, column=0, padx=15, pady=15)
 
-options_button = ctk.CTkButton(frame, text="Settings", command=lambda: OptionsWindow(frame), font=("Segoe UI", 18))
+def open_options(frame):
+        frame.options_window = OptionsWindow(frame)
+        frame.options_window.mainloop()
+
+options_button = ctk.CTkButton(frame, text="Settings", command=lambda: open_options(frame), font=("Segoe UI", 18))
 options_button.grid(row=0, column=1, ipady=5)
 
 # Define the order of the types: #
@@ -344,30 +345,18 @@ for mod in data["mods"]:
     def download_googledrive_file(file_id, destination):
         handle_existing_file(destination)
 
-        creds = None
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
-                creds = pickle.load(token)
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    'creds.json', ['https://www.googleapis.com/auth/drive.readonly'])
-                creds = flow.run_local_server(port=0)
-            with open('token.pickle', 'wb') as token:
-                pickle.dump(creds, token)
-
-        service = build('drive', 'v3', credentials=creds)
-        request = service.files().get_media(fileId=file_id)
-        fh = open(destination, 'wb')
-        downloader = MediaIoBaseDownload(fh, request)
-        done = False
-        while done is False:
-            status, done = downloader.next_chunk()
-            print("Download %d%%." % int(status.progress() * 100))
-        fh.close()
-
+        download_url = f'https://drive.google.com/uc?id={file_id}&export=download&confirm=t'
+        
+        try:
+            gdown.download(download_url, destination, quiet=False)
+            5
+        except Exception as e:
+            create_message_window("\nThe server is currently busy right now, please try again in a few minutes.\n\nA link will now open in your default web browser to redirect you to the mod's Google Drive page.\n\nYou can close this window now.\n")
+            
+            webbrowser.open(download_url)
+                   
+            return app
+        
         if zipfile.is_zipfile(destination):
             with zipfile.ZipFile(destination, 'r') as zip_ref:
                 zip_ref.extractall(os.path.dirname(destination))
