@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/anonymous-editor/BRMM/assets/74514726/a21722a8-dcd3-4c3e-ae69-e05cb3f8d58f" width=50% height=50%>
+  <img src="(https://github.com/anonymous-editor/BRMM/blob/accdcd87d40c92f8a691a55fb8158f6a42924fb7/visualization.mp4)" width=50% height=50%>
 </p>
 
 ## System Requirements:
@@ -18,13 +18,6 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 - Display prompts about if the mod is installed/not, etc.
 
 For those concerned about this app, a [privacy policy](https://github.com/anonymous-editor/BRMM/blob/main/PRIVACYPOLICY.md) and [terms and conditions document](https://github.com/anonymous-editor/BRMM/blob/main/T%26C.md) are included.
-
-## Repository Showcase:
-
-<video src="https://github.com/anonymous-editor/BRMM/raw/main/visualization.mp4" controls="controls" style="max-width: 730px;">
-</video>
-
-Courtesy of Copper.
 
 # Using BRMM:
 ## Mod Showcase:
