@@ -352,7 +352,7 @@ for mod in data["mods"]:
             5
         except Exception as e:
             create_message_window("\nThe server is currently busy right now, please try again in a few minutes.\n\nA link will now open in your default web browser to redirect you to the mod's Google Drive page.\n\nYou can close this window now.\n")
-            
+            print(f"For the techies: '{e}' -Copper") 
             webbrowser.open(download_url)
                    
             return app
