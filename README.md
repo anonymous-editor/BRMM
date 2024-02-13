@@ -19,6 +19,14 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 
 For those concerned about this app, a [privacy policy](https://github.com/anonymous-editor/BRMM/blob/main/PRIVACYPOLICY.md) and [terms and conditions document](https://github.com/anonymous-editor/BRMM/blob/main/T%26C.md) are included.
 
+## Repository Showcase:
+
+<video src="https://github.com/anonymous-editor/BRMM/raw/main/visualization.mp4" controls="controls" style="max-width: 730px;">
+</video>
+
+Courtesy of Copper.
+
+# Using BRMM:
 ## Mod Showcase:
 
 > [!TIP]
