@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="(https://github.com/anonymous-editor/BRMM/blob/accdcd87d40c92f8a691a55fb8158f6a42924fb7/visualization.mp4)" width=50% height=50%>
+  <img src="https://github.com/anonymous-editor/BRMM/assets/74514726/c329ce3c-ad99-4df6-b26e-0437afba4dec" width=50% height=50%>
 </p>
 
 ## System Requirements:
