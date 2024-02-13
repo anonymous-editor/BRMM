@@ -86,4 +86,4 @@ You can add mod entries to BRMM through [this `.md` file](https://github.com/ano
 
 ## Credits:
 - [KoT3isGood](https://github.com/KoT3isGood): Created a draft of implementing JSON code into BRMM, along with creating other commits.
-- [Iridium-7](https://github.com/Iridium-7): Added some configuration values into the original BRMM source code.
+- [Copper](https://github.com/FateUnix29): Added some configuration values into the original BRMM source code.
