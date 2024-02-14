@@ -70,13 +70,28 @@ if not os.path.isfile('settings.ini'): # I changed it to 'exists' but realized j
     save_window.mainloop()
 
 else:
-    config.read('settings.ini')
+    try:
+        config.read('settings.ini')
 
-    modpath = config['PATHS']['modpath']
-    pakspath = config['PATHS']['pakspath']
-    theme = config['UI']['theme']
-    number = config['UI']['columns']
-    imagetoggle = config['UI']['images']
+        modpath = config['PATHS']['modpath']
+        pakspath = config['PATHS']['pakspath']
+        theme = config['UI']['theme']
+        number = config['UI']['columns']
+        imagetoggle = config['UI']['images']
+    except KeyError:
+        print("KeyError! You're probably migrating from 2.2.0. Not to worry, this will try to generate 2.3.1 settings.ini based off of the original.")
+        print(f"Specifically, the KeyError reads: '{KeyError}'")
+        print("If this is NOT relating to not finding ['UI']['images'], delete settings.ini and regenerate it. It's corrupted, intentionally or accidentally.")
+        config['UI']['images'] = "True"
+        with open('settings.ini', 'w') as configfile:
+            config.write(configfile)
+
+        config.read('settings.ini')
+        modpath = config['PATHS']['modpath']
+        pakspath = config['PATHS']['pakspath']
+        theme = config['UI']['theme']
+        number = config['UI']['columns']
+        imagetoggle = config['UI']['images']
 
 # Global Theming: #
 
