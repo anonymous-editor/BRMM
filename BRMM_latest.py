@@ -49,12 +49,12 @@ scrollable_frame = app.scrollable_frame
 config = configparser.ConfigParser()
 config.read('settings.ini')
 
-if not os.path.isfile('settings.ini'):
+if not os.path.isfile('settings.ini'): # I changed it to 'exists' but realized just now it should probably stay the same.
     modpath = filedialog.askdirectory(title="Select your 'Mods' folder to continue.")
     pakspath = filedialog.askdirectory(title="Select your 'Paks' folder to continue.")
 
     config['PATHS'] = {'modpath': modpath, 'pakspath': pakspath}
-    config['UI'] = {'columns': 3, 'theme': "dark-blue"}
+    config['UI'] = {'columns': 3, 'theme': "dark-blue", 'images': "True"}
 
     with open('settings.ini', 'w') as configfile:
         config.write(configfile)
@@ -76,6 +76,7 @@ else:
     pakspath = config['PATHS']['pakspath']
     theme = config['UI']['theme']
     number = config['UI']['columns']
+    imagetoggle = config['UI']['images']
 
 # Global Theming: #
 
@@ -93,13 +94,15 @@ class OptionsWindow(ctk.CTkToplevel):
 
         self.modspath_var = tk.StringVar()
         self.pakspath_var = tk.StringVar()
+        self.images = tk.StringVar()
 
-        # Mechanism to display the current mod/pak folder paths: #
+        # Mechanism to display the current mod/pak folder paths (and image toggle): #
 
         config.read('settings.ini')
 
         self.modspath_var.set(config['PATHS']['modpath'])
         self.pakspath_var.set(config['PATHS']['pakspath'])
+        self.images.set(config['UI']['images'])
 
         # UI Organization: #
 
@@ -148,7 +151,19 @@ class OptionsWindow(ctk.CTkToplevel):
         apply_theme_button = ctk.CTkButton(frame1, text="Apply Theme", command=self.apply_theme_changes, font=("Segoe UI", 14))
         dropdown_label.pack(pady=5)
         apply_theme_button.pack(pady=10, ipady=5)
-    
+
+        # Image toggle widget: #
+        
+        image_txt = ctk.CTkLabel(frame1, text="Mod image previews?", font=("Sego UI", 16)) # Heed my warning! Spagetti code for I have no clue what I'm doing.
+        image_txt.pack(pady=(15, 5))
+        self.imageops = ["True", "False"]
+        self.imagebut = ctk.CTkComboBox(frame1, values=self.imageops)
+        self.imagebut.pack()
+        self.imagebut.set(imagetoggle)
+        self.imagebut.bind("<FocusOut>", self.destroy)
+        self.apimgbut = ctk.CTkButton(frame1, text="Apply Image Toggle", command=self.apply_image, font=("Segoe UI", 14))
+        self.apimgbut.pack(pady=10, ipady=5)
+
     # Tab 2 Widgets: #
            
         modpath_label = ctk.CTkLabel(frame2, text="DISCLAIMER: Any changes you make here will only apply when you restart BRMM.\n\nMods folder path:", font=("Segoe UI", 16), wraplength=250)
@@ -196,6 +211,13 @@ class OptionsWindow(ctk.CTkToplevel):
         config['UI']['theme'] = selected_theme
         with open('settings.ini', 'w') as configfile:
             config.write(configfile)
+
+    def apply_image(self):
+        writeimage = self.imagebut.get()
+        config.read('settings.ini')
+        config['UI']['images'] = writeimage
+        with open('settings.ini', 'w') as file:
+            config.write(file)
             
     # Window Launcher: #
 
@@ -203,6 +225,12 @@ class OptionsWindow(ctk.CTkToplevel):
         OptionsWindow(parent)
 
 options_window = OptionsWindow.open_options_window
+
+def check_if_exist(destination):
+    if os.path.exists(destination):
+        return True
+    else:
+        return False
 
 # Frame GUI Formatting: #
 
@@ -230,6 +258,26 @@ class ContentFormatting:
     @staticmethod
     def create_image_label_packing(is_centered):
         return {"anchor": is_centered, "padx": 30, "pady": 15}
+    
+    @staticmethod
+    def get_install_button_config(file_path, file_path_2 = "copper"):
+        #print("ho ho! i've been called!")
+        if check_if_exist(file_path) or check_if_exist(file_path_2):
+            #print("we got an exister")
+            return {"text": "Install", "font": ("Segoe UI", 18), "fg_color": "#154483"}
+        else:
+            #print("we dont got an exister")
+            return {"text": "Install", "font": ("Segoe UI",  18)}
+    
+    @staticmethod
+    def get_remove_button_config(file_path):
+        #print("ho ho! i've also been called brother!")
+        if check_if_exist(file_path):
+            #print("file exists, so remove button is normal")
+            return {"text": "Remove", "font": ("Segoe UI Semibold", 18), "fg_color": "#b3322e"}
+        else:
+            #print("this file's end is now")
+            return {"text": "Remove", "font": ("Segoe UI Semibold", 18), "fg_color": "#951410"}
 
 mod_title_font = ContentFormatting.MOD_TITLE_FONT
 mod_content_font = ContentFormatting.MOD_CONTENT_FONT
@@ -237,8 +285,14 @@ install_button = ContentFormatting.INSTALL_BUTTON
 install_button_packing = ContentFormatting.INSTALL_BUTTON_PACKING
 remove_button = ContentFormatting.REMOVE_BUTTON
 remove_button_packing = ContentFormatting.REMOVE_BUTTON_PACKING
-create_image_label = ContentFormatting.create_image_label
-create_image_label_packing = ContentFormatting.create_image_label_packing
+config.read('settings.ini')
+if config['UI']['images'] == "True":
+    create_image_label = ContentFormatting.create_image_label
+    create_image_label_packing = ContentFormatting.create_image_label_packing
+else:
+    print("image creation set to false, so not creating images. this is probably going to break things, oh well who cares. -Copper")
+    print("if any actual issues arrise, immediately report it on the issues page at https://github.com/anonymous-editor/BRMM")
+    print("for technical info, this is literally skipping usage of the image creation functions in ContentFormatting")
 
 # Uninstaller: #
 
@@ -309,15 +363,16 @@ for mod in data["mods"]:
     textbox_16.pack(anchor="center", padx=10, pady=10)
 
     # Image Loading: #
+    config.read('settings.ini')
+    if config['UI']['images'] == "True":
+        response = requests.get(mod["image"])
+        image = Image.open(BytesIO(response.content))
+        image.thumbnail((480, 270))
 
-    response = requests.get(mod["image"])
-    image = Image.open(BytesIO(response.content))
-    image.thumbnail((480, 270))
+        ctk_image = ctk.CTkImage(image, size=(480, 270))
 
-    ctk_image = ctk.CTkImage(image, size=(480, 270))
-
-    label = ctk.CTkLabel(frame_10, image=ctk_image, text="")
-    label.pack(**create_image_label_packing('center'))
+        label = ctk.CTkLabel(frame_10, image=ctk_image, text="")
+        label.pack(**create_image_label_packing('center'))
 
     textbox_17 = ctk.CTkLabel(frame_10, font=("Segoe UI", 16), text=mod["description"]+"\n\nSize: "+mod["size"]+"\nAuthor: "+mod["author"], wraplength=500)
     textbox_17.pack(anchor="center", padx=30, pady=15)
@@ -391,17 +446,20 @@ for mod in data["mods"]:
 
     if mod["installType"] in google_paths:
         destination = os.path.join(google_paths[mod["installType"]], mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{google_paths[mod["installType"]]}{mod["installpath"]}': download_googledrive_file(file_id, destination), **install_button)
+        destination2 = os.path.join(google_paths[mod["installType"]], mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda file_id=mod["install"], destination=f'{google_paths[mod["installType"]]}{mod["installpath"]}': download_googledrive_file(file_id, destination), **ContentFormatting.get_install_button_config(f"{modpath}{mod['installpath']}", f"{pakspath}{mod['installpath']}"))
         button.pack(**install_button_packing)
-    
+
     elif mod["installType"] in discord_paths:
         destination = os.path.join(discord_paths[mod["installType"]], mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{discord_paths[mod["installType"]]}{mod["installpath"]}': download_discord_file(url, destination), **install_button)
+        destination2 = os.path.join(discord_paths[mod["installType"]], mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{discord_paths[mod["installType"]]}{mod["installpath"]}': download_discord_file(url, destination), **ContentFormatting.get_install_button_config(f"{modpath}{mod['installpath']}", f"{pakspath}{mod['installpath']}"))
         button.pack(**install_button_packing)
 
     elif mod["installType"] == "github":
         destination = os.path.join(modpath, mod["installpath"])
-        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_github_zipfile(url, destination), **install_button)
+        destination2 = os.path.join(modpath, mod["installpath"])
+        button = ctk.CTkButton(frame_10, command=lambda url=mod["install"], destination=f'{modpath}{mod["installpath"]}': download_github_zipfile(url, destination), **ContentFormatting.get_install_button_config(f"{modpath}{mod['installpath']}", f"{pakspath}{mod['installpath']}")) #install_button
         button.pack(**install_button_packing)
 
     # File Removal Managers: #
@@ -424,12 +482,13 @@ for mod in data["mods"]:
     if mod["deinstallType"] == "zip":
         file_path = f'{paths[mod["deinstallType"]]}{mod["installpath"]}'
         folder_path = f'{paths[mod["deinstallType"]]}{mod["deinstallpath"]}'
-        button = ctk.CTkButton(frame_10, command=lambda file_path=file_path, folder_path=folder_path: remove_file(file_path, folder_path), **remove_button)
+        button = ctk.CTkButton(frame_10, command=lambda file_path=file_path, folder_path=folder_path: remove_file(file_path, folder_path), **ContentFormatting.get_remove_button_config(f"{modpath}{mod['installpath']}")) #remove_button
         button.pack(**remove_button_packing)
+
 
     elif mod["deinstallType"] == "pak":
         file_path = f'{paths[mod["deinstallType"]]}{mod["installpath"]}'
-        button = ctk.CTkButton(frame_10, command=lambda file_path=file_path: remove_file(file_path), **remove_button)
+        button = ctk.CTkButton(frame_10, command=lambda file_path=file_path: remove_file(file_path), **ContentFormatting.get_remove_button_config(f"{pakspath}{mod['installpath']}")) #remove_button
         button.pack(**remove_button_packing)
 
 app.mainloop()
