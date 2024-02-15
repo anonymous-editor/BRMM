@@ -4,7 +4,7 @@ The source code is included as `BRMM_latest.py` and for those who want it. All d
 
 To open the script from source, you'll need:
 - An IDE (I just used `Visual Studio Code`)
-- `Python 3.12`
+- `Python 3.11.5` (Lowest version successfully ran and developed on)
 
 To actually run the script, you'll need the following dependecies:
   ```
