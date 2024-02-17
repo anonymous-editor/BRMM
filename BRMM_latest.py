@@ -250,8 +250,7 @@ class ContentFormatting:
 
     @staticmethod
     def create_frame(parent, **kwargs):
-        frame = ctk.CTkFrame(parent, bg="#003459", padx=10, pady=10, **kwargs)
-        frame.grid()
+        frame = tk.Frame(parent, bg="#003459", padx=10, pady=10, **kwargs)
         return frame
 
     @staticmethod
@@ -356,7 +355,7 @@ CACHE_DIR = 'image_cache'
 
 def download_image(url, cache_dir=CACHE_DIR):
     os.makedirs(cache_dir, exist_ok=True)
-    
+
     filename = os.path.join(cache_dir, url.split('/')[-1])
     
     if os.path.exists(filename):
