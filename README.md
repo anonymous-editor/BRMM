@@ -17,7 +17,7 @@ This is BRMM, an unofficial, 'plug and play' mod management solution for Brick R
 - Install and/or extract mods to those paths.
 - Display prompts about if the mod is installed/not, etc.
 
-For those concerned about this app, a [privacy policy](https://github.com/anonymous-editor/BRMM/blob/main/PRIVACYPOLICY.md) and [terms and conditions document](https://github.com/anonymous-editor/BRMM/blob/main/T%26C.md) are included.
+For those concerned about this app, a [privacy policy](https://github.com/anonymous-editor/BRMM/blob/main/Documentation/PRIVACYPOLICY.md) and [terms and conditions document](https://github.com/anonymous-editor/BRMM/blob/main/Documentation/T%26C.md) are included.
 
 # Using BRMM:
 ## Mod Showcase:
@@ -63,11 +63,11 @@ You can use the terminal to check if your download operations are successful or 
 
 Anyone (who wants to improve BRMM) can make pull requests to `BRMM_latest.py`. Be sure to provide a description of what you want to change however, so that it is more likely to be approved. This is a **semi-community project**, so please don't fork the project into another public repository, unless if it is being used to assist with this project.
 
-You can run BRMM from source by using [these instructions](https://github.com/anonymous-editor/BRMM/blob/main/SOURCECODE.md).
+You can run BRMM from source by using [these instructions](https://github.com/anonymous-editor/BRMM/blob/main/Documentation/SOURCECODE.md).
 
 ### GUI:
 
-You can add mod entries to BRMM through [this `.md` file](https://github.com/anonymous-editor/BRMM/blob/main/JSONEDITING.md). All instructions are provided in the link.
+You can add mod entries to BRMM through [this `.md` file](https://github.com/anonymous-editor/BRMM/blob/main/Documentation/JSONEDITING.md). All instructions are provided in the link.
 
 ## Credits:
 - [KoT3isGood](https://github.com/KoT3isGood): Created a draft of implementing JSON code into BRMM, along with creating other commits.
