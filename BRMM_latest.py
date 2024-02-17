@@ -5,7 +5,6 @@ import customtkinter as ctk
 from customtkinter import filedialog, CTk, CTkLabel
 
 from PIL import Image
-from io import BytesIO
 
 import os
 import zipfile
@@ -71,8 +70,6 @@ if not os.path.isfile('settings.ini'): # I changed it to 'exists' but realized j
 
 else:
     try:
-        config.read('settings.ini')
-
         modpath = config['PATHS']['modpath']
         pakspath = config['PATHS']['pakspath']
         theme = config['UI']['theme']
@@ -86,7 +83,6 @@ else:
         with open('settings.ini', 'w') as configfile:
             config.write(configfile)
 
-        config.read('settings.ini')
         modpath = config['PATHS']['modpath']
         pakspath = config['PATHS']['pakspath']
         theme = config['UI']['theme']
@@ -107,13 +103,11 @@ class OptionsWindow(ctk.CTkToplevel):
         self.bind("<Destroy>", self.apply_changes)
         self.iconbitmap('BRMM_ico.ico')
 
-        self.modspath_var = tk.StringVar()
-        self.pakspath_var = tk.StringVar()
-        self.images = tk.StringVar()
+        self.modspath_var = ctk.StringVar()
+        self.pakspath_var = ctk.StringVar()
+        self.images = ctk.StringVar()
 
         # Mechanism to display the current mod/pak folder paths (and image toggle): #
-
-        config.read('settings.ini')
 
         self.modspath_var.set(config['PATHS']['modpath'])
         self.pakspath_var.set(config['PATHS']['pakspath'])
@@ -143,7 +137,7 @@ class OptionsWindow(ctk.CTkToplevel):
         dropdown_label = ctk.CTkLabel(frame1, text="DISCLAIMER: Any changes you make here will only apply when you restart BRMM.\n\nNumber of columns:", font=("Segoe UI", 16), wraplength=250)
         dropdown_label.pack(pady=5)
         self.dropdown_options = ["2", "3", "4", "5"]
-        self.selected_option = tk.StringVar()
+        self.selected_option = ctk.StringVar()
         self.dropdown_menu = ctk.CTkComboBox(frame1, values=self.dropdown_options)
         self.dropdown_menu.pack()
         self.dropdown_menu.set(str(current_value))
@@ -156,7 +150,7 @@ class OptionsWindow(ctk.CTkToplevel):
         theme_label = ctk.CTkLabel(frame1, text="Select theme:", font=("Segoe UI", 16))
         theme_label.pack(pady=(15, 5))
         self.theme_options = ["dark-blue", "blue", "green"]
-        self.selected_theme = tk.StringVar()
+        self.selected_theme = ctk.StringVar()
         self.theme_menu = ctk.CTkComboBox(frame1, values=self.theme_options)
         self.theme_menu.pack()
 
@@ -200,7 +194,6 @@ class OptionsWindow(ctk.CTkToplevel):
     def browse_modpath(self):
         path = filedialog.askdirectory(title="Select your 'Mods' folder.")
         self.modspath_var.set(path)
-        config.read('settings.ini')
         config['PATHS']['modpath'] = path
         with open('settings.ini', 'w') as configfile:
             config.write(configfile)
@@ -208,28 +201,24 @@ class OptionsWindow(ctk.CTkToplevel):
     def browse_pakspath(self):
         path = filedialog.askdirectory(title="Select your 'Paks' folder.")
         self.pakspath_var.set(path)
-        config.read('settings.ini')
         config['PATHS']['pakspath'] = path
         with open('settings.ini', 'w') as configfile:
             config.write(configfile)
 
     def apply_changes(self, event=None):
         selected_option = self.dropdown_menu.get()
-        config.read('settings.ini')
         config['UI']['columns'] = str(int(selected_option))
         with open('settings.ini', 'w') as configfile:
             config.write(configfile)
 
     def apply_theme_changes(self):
         selected_theme = self.theme_menu.get()
-        config.read('settings.ini')
         config['UI']['theme'] = selected_theme
         with open('settings.ini', 'w') as configfile:
             config.write(configfile)
 
     def apply_image(self):
         writeimage = self.imagebut.get()
-        config.read('settings.ini')
         config['UI']['images'] = writeimage
         with open('settings.ini', 'w') as file:
             config.write(file)
@@ -261,7 +250,8 @@ class ContentFormatting:
 
     @staticmethod
     def create_frame(parent, **kwargs):
-        frame = tk.Frame(parent, bg="#003459", padx=10, pady=10, **kwargs)
+        frame = ctk.CTkFrame(parent, bg="#003459", padx=10, pady=10, **kwargs)
+        frame.grid()
         return frame
 
     @staticmethod
@@ -300,7 +290,7 @@ install_button = ContentFormatting.INSTALL_BUTTON
 install_button_packing = ContentFormatting.INSTALL_BUTTON_PACKING
 remove_button = ContentFormatting.REMOVE_BUTTON
 remove_button_packing = ContentFormatting.REMOVE_BUTTON_PACKING
-config.read('settings.ini')
+
 if config['UI']['images'] == "True":
     create_image_label = ContentFormatting.create_image_label
     create_image_label_packing = ContentFormatting.create_image_label_packing
@@ -362,6 +352,25 @@ current_positions = {type: {'row': 0, 'col': 0} for type in types_order}
 
 # Populate the tabs with mods: #
 
+CACHE_DIR = 'image_cache'
+
+def download_image(url, cache_dir=CACHE_DIR):
+    os.makedirs(cache_dir, exist_ok=True)
+    
+    filename = os.path.join(cache_dir, url.split('/')[-1])
+    
+    if os.path.exists(filename):
+        return Image.open(filename)
+    
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
+    
+    with open(filename, 'wb') as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            f.write(chunk)
+    
+    return Image.open(filename)
+
 for mod in data["mods"]:
     position = current_positions[mod["type"]]
 
@@ -378,14 +387,13 @@ for mod in data["mods"]:
     textbox_16.pack(anchor="center", padx=10, pady=10)
 
     # Image Loading: #
-    config.read('settings.ini')
     if config['UI']['images'] == "True":
-        response = requests.get(mod["image"])
-        image = Image.open(BytesIO(response.content))
-        image.thumbnail((480, 270))
-
-        ctk_image = ctk.CTkImage(image, size=(480, 270))
-
+        # Use the download_image function to get the image
+        image = download_image(mod["image"])
+        image.thumbnail((480,  270))
+        
+        ctk_image = ctk.CTkImage(image, size=(480,  270))
+        
         label = ctk.CTkLabel(frame_10, image=ctk_image, text="")
         label.pack(**create_image_label_packing('center'))
 
