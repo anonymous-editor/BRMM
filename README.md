@@ -71,4 +71,4 @@ You can add mod entries to BRMM through [this `.md` file](https://github.com/ano
 
 ## Credits:
 - [KoT3isGood](https://github.com/KoT3isGood): Created a draft of implementing JSON code into BRMM, along with creating other commits.
-- [Copper](https://github.com/FateUnix29): Added some configuration values into the original BRMM source code. Also, the visualization .mp4 file.
+- [Copper](https://github.com/FateUnix29): Added some configuration values into the original BRMM source code. Later on (about the time of this readme.md update), mostly responsible for 3.2.1. (Everything but image caching, actually.)
