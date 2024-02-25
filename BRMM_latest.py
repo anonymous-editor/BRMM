@@ -10,10 +10,10 @@ import os
 import zipfile
 import requests
 import shutil
-import os.path
 
 import gdown
 import webbrowser
+import re
 
 import configparser
 import urllib
@@ -25,6 +25,9 @@ import json
 dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/Resources/JSON/content.json"
 response = urllib.request.urlopen(dataurl)
 data = json.loads(response.read().decode('utf-8'))
+
+# Define 'is_updating' at the global scope
+is_updating = False
 
 # App Frame Code: #
 
@@ -45,14 +48,9 @@ scrollable_frame = app.scrollable_frame
 
 # Function Definitions: #
 
-def create_message_window(message_text, is_updating=False):
+def create_message_window(message_text, title):
     window = CTk()
-
-    if is_updating == True:
-        window.title("Update Status")
-    elif is_updating == False:
-        window.title("Mod Status")
-
+    window.title(title)
     window.iconbitmap('BRMM_ico.ico')
     
     message = CTkLabel(window, text=message_text, font=("Segoe UI",  16), padx=50)
@@ -70,7 +68,7 @@ def check_if_exist(destination):
 
 def handle_existing_file(destination):
     if os.path.exists(destination):
-        create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n")
+        create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n", "Update Manager")
         return app
 
 def download_file(url, destination, download_func):
@@ -93,9 +91,9 @@ def download_googledrive_file(file_id, destination):
     
     try:
         gdown.download(download_url, destination, quiet=False)
-        5
+        
     except Exception as e:
-        create_message_window("\nThe server is currently busy right now, please try again in a few minutes.\n\nA link will now open in your default web browser to redirect you to the mod's Google Drive page.\n\nYou can close this window now.\n")
+        create_message_window("\nThe server is currently busy right now, please try again in a few minutes.\n\nA link will now open in your default web browser to redirect you to the mod's Google Drive page.\n\nYou can close this window now.\n", "Server Status")
         print(f"For the techies: '{e}' -Copper") 
         webbrowser.open(download_url)
                 
@@ -105,7 +103,7 @@ def download_googledrive_file(file_id, destination):
         with zipfile.ZipFile(destination, 'r') as zip_ref:
             zip_ref.extractall(os.path.dirname(destination))
 
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
+    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n", "Mod Status")
 
     return app
     
@@ -130,11 +128,18 @@ def download_github_zipfile(url, destination):
     if is_updating:
         return app
     
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs\n")
+    create_message_window("\nThe mod has successfully been installed into Brick Rigs\n", "Mod Status")
 
     return app
 
 # Autoupdater: #
+
+update_dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/Resources/JSON/update_helper.json"
+update_response = urllib.request.urlopen(update_dataurl)
+update_data = json.loads(update_response.read().decode('utf-8'))
+version_string = update_data["infomation"][0]["latest_version"]
+download_link = update_data["infomation"][0]["direct_download_link"]
+current_version = 300
 
 def update_brmm():
     global is_updating
@@ -142,16 +147,8 @@ def update_brmm():
 
     local_path = ""
 
-    update_dataurl = "https://raw.githubusercontent.com/anonymous-editor/BRMM/main/Resources/JSON/update_helper.json"
-    update_response = urllib.request.urlopen(update_dataurl)
-    update_data = json.loads(update_response.read().decode('utf-8'))
-    version_string = update_data["infomation"][0]["latest_version"]
-    download_link = update_data["infomation"][0]["direct_download_link"]
-
-    current_version =  300
-
     if version_string == str(current_version):
-        create_message_window("\nYou are already on the latest version of BRMM.\n")
+        create_message_window("\nYou are already on the latest version of BRMM.\n", "Update Handler")
         return
 
     download_github_zipfile(download_link, os.path.join(local_path, f"BRMM{version_string}.zip"))
@@ -159,7 +156,11 @@ def update_brmm():
     with zipfile.ZipFile(os.path.join(local_path, f"BRMM{version_string}.zip"), 'r') as zip_ref:
         zip_ref.extractall(local_path)
 
-    create_message_window(f"\nThe latest version of BRMM has been placed alongside this version of BRMM.\n")
+    create_message_window("\nThe latest version of BRMM has been placed alongside this version of BRMM.\n", "Update Handler")
+
+    is_updating = False
+
+    return app
 
 # INI Config: #
 
@@ -169,14 +170,14 @@ config.read('settings.ini')
 if not os.path.isfile('settings.ini'): 
     modpath = filedialog.askdirectory(title="Select your 'Mods' folder to continue.")
     pakspath = filedialog.askdirectory(title="Select your 'Paks' folder to continue.")
-
+    
     config['PATHS'] = {'modpath': modpath, 'pakspath': pakspath}
     config['UI'] = {'columns': 3, 'theme': "dark-blue"}
 
     with open('settings.ini', 'w') as configfile:
         config.write(configfile)
 
-    create_message_window("\nBRMM has saved your Brick Rigs install paths in your BRMM folder!\n\nFrom now on, you don't have to manually select the two folders.\n\nPlease restart BRMM for full functionality.\n")
+    create_message_window("\nBRMM has saved your Brick Rigs install paths in your BRMM folder!\n\nFrom now on, you don't have to manually select the two folders.\n\nPlease restart BRMM for full functionality.\n", "Initial Setup")
 
 else:
     modpath = config['PATHS']['modpath']
@@ -190,6 +191,21 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme(theme)
 
 # Settings Windows: #
+
+current_version_with_periods = re.sub(r'(\d)', r'\1.', str(current_version))
+version_string_with_periods = re.sub(r'(\d)', r'\1.', str(version_string))
+
+def reset_brmm():
+    shutil.rmtree('image_cache', ignore_errors=True)
+    if os.path.exists('settings.ini'):
+        os.remove('settings.ini')
+    create_message_window("\nBRMM has been reset.\n", "Reset Handler")
+
+def copy_to_clipboard():
+    # The static text you want to copy to the clipboard
+    static_text = f"My current version of BRMM is {current_version_with_periods}\n\nThe lastest version of BRMM is {version_string}.\n\nI set my Mods and Paks folders to {modpath} and {pakspath} repectively.\n\nI have {number} columns and the {theme} theme applied in the UI."
+    app.clipboard_clear()
+    app.clipboard_append(f"```{static_text}```")
 
 class OptionsWindow(ctk.CTkToplevel):
     def __init__(self, parent=None):
@@ -214,6 +230,7 @@ class OptionsWindow(ctk.CTkToplevel):
         tab1 = tab_view.add("UI")
         tab2 = tab_view.add("Paths")
         tab3 = tab_view.add("Updates")
+        tab4 = tab_view.add("Troubleshooting")
 
         frame1 = ctk.CTkFrame(tab1)
         frame1.pack(fill='both', expand=True)
@@ -223,6 +240,8 @@ class OptionsWindow(ctk.CTkToplevel):
         frame3.pack(fill='both', expand=True)
         frame4 = ctk.CTkFrame(tab3)
         frame4.pack(fill='both', expand=True)
+        frame5 = ctk.CTkFrame(tab4) 
+        frame5.pack(fill='both', expand=True)
 
     # Tab 1 Widgets: #
 
@@ -275,13 +294,23 @@ class OptionsWindow(ctk.CTkToplevel):
     
     # Tab 3 Widgets: #
 
-        updater_label = ctk.CTkLabel(frame4, text="DISCLAIMER: Any changes you make here will only apply when you restart BRMM.\n\nMods folder path:", font=("Segoe UI", 16), wraplength=250)
+        updater_label = ctk.CTkLabel(frame4, text=f"You are currently running BRMM, version {current_version_with_periods}\n\nUse the button provided below to manually check for an update.\n\nCopy and paste your 'settings.ini' into your updated BRMM directory for a seamless transition.", font=("Segoe UI",  16), wraplength=250)
         updater_label.pack(pady=5)
-        updater_entry = ctk.CTkEntry(frame4, textvariable=self.modspath_var, width=250)
-        updater_entry.pack()
-        updater_button = ctk.CTkButton(frame4, text="Browse", command=update_brmm, font=("Segoe UI", 14))
+        updater_button = ctk.CTkButton(frame4, text="Update", command=update_brmm, font=("Segoe UI",  14))
         updater_button.pack(pady=10, ipady=5)
 
+    # Tab 4 Widgets: #
+        
+        help_label = ctk.CTkLabel(frame5, text=f"If you are having any problems with BRMM, please use the button below to copy and paste some diagnostic information into Markdown format.", font=("Segoe UI",  16), wraplength=250)
+        help_label.pack(pady=5)
+        help_button = ctk.CTkButton(frame5, text="Copy Text", command=copy_to_clipboard, font=("Segoe UI", 14))
+        help_button.pack(pady=10, ipady=5)
+
+        reset_label = ctk.CTkLabel(frame5, text=f"As an alternative, you can also reset BRMM using the button below.", font=("Segoe UI",  16), wraplength=250)
+        reset_label.pack(pady=(15,5))
+        reset_button = ctk.CTkButton(frame5, text="Reset BRMM", command=reset_brmm, font=("Segoe UI", 14))
+        reset_button.pack(pady=10, ipady=5)
+            
     # File Operations: #
 
     def browse_modpath(self):
@@ -346,22 +375,16 @@ class ContentFormatting:
     
     @staticmethod
     def get_install_button_config(file_path, file_path_2 = "copper"):
-        #print("ho ho! i've been called!")
         if check_if_exist(file_path) or check_if_exist(file_path_2):
-            #print("we got an exister")
             return {"text": "Install", "font": ("Segoe UI", 18), "fg_color": "#154483"}
         else:
-            #print("we dont got an exister")
             return {"text": "Install", "font": ("Segoe UI",  18)}
     
     @staticmethod
     def get_remove_button_config(file_path):
-        #print("ho ho! i've also been called brother!")
         if check_if_exist(file_path):
-            #print("file exists, so remove button is normal")
             return {"text": "Remove", "font": ("Segoe UI Semibold", 18), "fg_color": "#b3322e"}
         else:
-            #print("this file's end is now")
             return {"text": "Remove", "font": ("Segoe UI Semibold", 18), "fg_color": "#951410"}
 
 mod_title_font = ContentFormatting.MOD_TITLE_FONT
@@ -376,10 +399,10 @@ create_image_label_packing = ContentFormatting.create_image_label_packing
 # Uninstaller: #
 
 def usuccessmessage():
-    create_message_window("\nThe mod has been removed from Brick Rigs!\n\nYou can close this window now.\n")
+    create_message_window("\nThe mod has been removed from Brick Rigs!\n\nYou can close this window now.\n", "Mod Status")
 
 def notexists():
-    create_message_window("\nThe mod is not installed into Brick Rigs.\n\nYou can close this window now.\n")
+    create_message_window("\nThe mod is not installed into Brick Rigs.\n\nYou can close this window now.\n", "Mod Status")
 
 # Main Window GUI: #
 
