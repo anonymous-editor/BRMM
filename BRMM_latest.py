@@ -1,24 +1,25 @@
-# Dependencies: #
-
-import tkinter as tk
-import customtkinter as ctk
-from customtkinter import filedialog, CTk, CTkLabel
-
-from PIL import Image
-
+# Standard library imports
 import os
-import zipfile
-import requests
-import shutil
-
-import gdown
-import webbrowser
 import re
+import shutil
+import zipfile
+import json
 
+# Third-party library imports
 import configparser
+import requests
 import urllib
 from urllib.request import urlopen
-import json
+from PIL import Image
+import webbrowser
+
+# Custom library imports
+import customtkinter as ctk
+from customtkinter import filedialog, CTk, CTkLabel
+import gdown
+
+# Tkinter imports
+import tkinter as tk
 
 # JSON Loading: #
 
@@ -71,66 +72,39 @@ def handle_existing_file(destination):
         create_message_window("\nThe mod is already installed into your copy of Brick Rigs.\n\nYou can close this window now.\n", "Update Manager")
         return app
 
-def download_file(url, destination, download_func):
+def download_and_extract(url, destination, download_func, title):
     handle_existing_file(destination)
-
     download_func(url, destination, quiet=False)
     
     if zipfile.is_zipfile(destination):
+        directory_name = os.path.splitext(destination)[0]
+        os.makedirs(directory_name, exist_ok=True)
+        
         with zipfile.ZipFile(destination, 'r') as zip_ref:
-            zip_ref.extractall(os.path.dirname(destination))
-
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n")
-
+            zip_ref.extractall(directory_name)
+    
+    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n", title)
     return app
+
+def download_file(url, destination, download_func):
+    return download_and_extract(url, destination, download_func, "Mod Status")
 
 def download_googledrive_file(file_id, destination):
-    handle_existing_file(destination)
-
     download_url = f'https://drive.google.com/uc?id={file_id}&export=download&confirm=t'
-    
     try:
-        gdown.download(download_url, destination, quiet=False)
-        
+        return download_and_extract(download_url, destination, gdown.download, "Server Status")
     except Exception as e:
         create_message_window("\nThe server is currently busy right now, please try again in a few minutes.\n\nA link will now open in your default web browser to redirect you to the mod's Google Drive page.\n\nYou can close this window now.\n", "Server Status")
-        print(f"For the techies: '{e}' -Copper") 
+        print(f"For the techies: '{e}' -Copper")  
         webbrowser.open(download_url)
-                
         return app
-    
-    if zipfile.is_zipfile(destination):
-        with zipfile.ZipFile(destination, 'r') as zip_ref:
-            zip_ref.extractall(os.path.dirname(destination))
 
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs!\n\nYou can close this window now.\n", "Mod Status")
-
-    return app
-    
-def download_discord_file(url, filename):  
+def download_discord_file(url, filename):   
     download_file(url, filename, lambda url, destination, quiet: open(destination, 'wb').write(requests.get(url).content))
 
 def download_github_zipfile(url, destination):
-    if is_updating:
-        pass
-    else:
-        handle_existing_file(destination)
+    download_file(url, destination, lambda url, destination, quiet: open(destination, 'wb').write(requests.get(url).content))
 
-    response = requests.get(url)
-
-    with open(destination, 'wb') as out_file:
-        out_file.write(response.content)
-
-    if zipfile.is_zipfile(destination):
-        with zipfile.ZipFile(destination, 'r') as zip_ref:
-            zip_ref.extractall(os.path.splitext(destination)[0])
-
-    if is_updating:
-        return app
-    
-    create_message_window("\nThe mod has successfully been installed into Brick Rigs\n", "Mod Status")
-
-    return app
 
 # Autoupdater: #
 
@@ -203,7 +177,7 @@ def reset_brmm():
 
 def copy_to_clipboard():
     # The static text you want to copy to the clipboard
-    static_text = f"My current version of BRMM is {current_version_with_periods}\n\nThe lastest version of BRMM is {version_string}.\n\nI set my Mods and Paks folders to {modpath} and {pakspath} repectively.\n\nI have {number} columns and the {theme} theme applied in the UI."
+    static_text = f"My current version of BRMM is {current_version_with_periods}\n\nThe lastest version of BRMM is {version_string_with_periods}\n\nI set my Mods and Paks folders to '{modpath}' and '{pakspath}' repectively.\n\nI have {number} columns and the {theme} theme applied in the UI."
     app.clipboard_clear()
     app.clipboard_append(f"```{static_text}```")
 
@@ -306,7 +280,7 @@ class OptionsWindow(ctk.CTkToplevel):
         help_button = ctk.CTkButton(frame5, text="Copy Text", command=copy_to_clipboard, font=("Segoe UI", 14))
         help_button.pack(pady=10, ipady=5)
 
-        reset_label = ctk.CTkLabel(frame5, text=f"As an alternative, you can also reset BRMM using the button below.", font=("Segoe UI",  16), wraplength=250)
+        reset_label = ctk.CTkLabel(frame5, text=f"As an alternative, you can also reset BRMM using the button below. Restart BRMM as soon as it resets and do not initiate any more downloads until BRMM is reopened.", font=("Segoe UI",  16), wraplength=250)
         reset_label.pack(pady=(15,5))
         reset_button = ctk.CTkButton(frame5, text="Reset BRMM", command=reset_brmm, font=("Segoe UI", 14))
         reset_button.pack(pady=10, ipady=5)
@@ -455,7 +429,7 @@ def download_image(url, cache_dir=CACHE_DIR):
     with open(filename, 'wb') as f:
         for chunk in response.iter_content(chunk_size=8192):
             f.write(chunk)
-    
+                
     return Image.open(filename)
 
 for mod in data["mods"]:
